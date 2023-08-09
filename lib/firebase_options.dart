@@ -55,7 +55,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDY2eaA9tZGEZTePICYyI3YB0WDxSOc-Wk',
-    appId: '1:151306733573:android:a392944d45f60cf16ff46c',
+    appId: '1:151306733573:android:f653c9fc9184eda06ff46c',
     messagingSenderId: '151306733573',
     projectId: 'uniplay-556bb',
     databaseURL: 'https://uniplay-556bb-default-rtdb.firebaseio.com',
@@ -64,7 +64,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyDfnRgm3b2rlKSpqtgF1UFX-pLWZiFlLXY',
-    appId: '1:151306733573:ios:a2a7c3a07ab06eb46ff46c',
+    appId: '1:151306733573:ios:3d7ab2717e1f7bc76ff46c',
     messagingSenderId: '151306733573',
     projectId: 'uniplay-556bb',
     databaseURL: 'https://uniplay-556bb-default-rtdb.firebaseio.com',
@@ -75,7 +75,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyDfnRgm3b2rlKSpqtgF1UFX-pLWZiFlLXY',
-    appId: '1:151306733573:ios:dc36498af3f915126ff46c',
+    appId: '1:151306733573:ios:b67cb9afb27dae016ff46c',
     messagingSenderId: '151306733573',
     projectId: 'uniplay-556bb',
     databaseURL: 'https://uniplay-556bb-default-rtdb.firebaseio.com',
