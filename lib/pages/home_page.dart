@@ -118,7 +118,7 @@ class _HomePageState extends State<HomePage> {
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   TextSpan(
-                    text: currentUser.displayName!,
+                    text: "era pra ser seu nick", //currentUser.displayName,
                   ),
                 ],
               ),

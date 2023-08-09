@@ -1,8 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:uniplay/components/text_box.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+  ProfilePage({super.key});
+  final user = FirebaseAuth.instance.currentUser!;
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -10,7 +12,7 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   // gets the current user
-  // final currentuser = FirebaseAuth.instance.currentUser();
+  final currentUser = FirebaseAuth.instance.currentUser!;
 
   // edit field
   Future<void> editField(String field) async {}
@@ -59,7 +61,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
           // username
           MyTextBox(
-            text: 'Johnny',
+            text: currentUser.displayName!,
             sectionName: 'Username',
             onPressed: () => editField('username'),
           ),
