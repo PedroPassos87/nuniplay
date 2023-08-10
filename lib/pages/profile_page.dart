@@ -61,7 +61,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
           // username
           MyTextBox(
-            text: currentUser.displayName!,
+            text: "User124567",
             sectionName: 'Username',
             onPressed: () => editField('username'),
           ),
