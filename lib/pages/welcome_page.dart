@@ -69,7 +69,7 @@ class WelcomePage extends StatelessWidget {
                       ),
                       child: const Center(
                         child: Text(
-                          'Login',
+                          'Get Started',
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
@@ -86,6 +86,4 @@ class WelcomePage extends StatelessWidget {
       ),
     );
   }
-
-  onTap() {}
 }

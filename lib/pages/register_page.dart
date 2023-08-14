@@ -1,8 +1,10 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:animated_background/animated_background.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:uniplay/components/my_button.dart';
-import 'package:uniplay/components/my_textfield.dart';
+import 'package:uniplay/components/my_buttonP.dart';
+import 'package:uniplay/components/my_textfieldP.dart';
 import 'package:uniplay/components/square_tile.dart';
 import 'package:uniplay/services/auth_service.dart';
 
@@ -15,7 +17,8 @@ class RegisterPage extends StatefulWidget {
   State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMixin {
+class _RegisterPageState extends State<RegisterPage>
+    with TickerProviderStateMixin {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
@@ -40,11 +43,10 @@ class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMix
     }
     //try creating the user
     try {
-
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: emailController.text,
-          password: passwordController.text,
-        );
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
 
       //pop the loading circle
       Navigator.pop(context);
@@ -79,21 +81,18 @@ class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMix
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 196, 77, 217),
-      body:  AnimatedBackground(
+      body: AnimatedBackground(
         behaviour: RandomParticleBehaviour(
-          options: const ParticleOptions(
-            spawnMaxRadius: 30,
-            spawnMinSpeed: 10.00,
-            particleCount: 60,
-            spawnMaxSpeed: 50.00,
-            minOpacity: 0.1,
-            spawnOpacity: 0.3,
-            
-            image: Image(image: AssetImage('assets/images/ship.png')),            
-          )
-        ),
+            options: const ParticleOptions(
+          spawnMaxRadius: 30,
+          spawnMinSpeed: 10.00,
+          particleCount: 60,
+          spawnMaxSpeed: 50.00,
+          minOpacity: 0.1,
+          spawnOpacity: 0.3,
+          image: Image(image: AssetImage('assets/images/ship.png')),
+        )),
         vsync: this,
-
         child: SafeArea(
           child: Center(
             child: SingleChildScrollView(
@@ -105,136 +104,161 @@ class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMix
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset(
-                        'assets/images/logouni.png',
-                        height: 125,
+                        'assets/images/logounipng.png',
+                        height: 175,
                       ),
                     ],
                   ),
-      
-                  const SizedBox(height: 10),
-                  //welcome user
-                  const Text(
-                    'Become one of us', //escolher uma mensagem melhor
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
+
+                  const SizedBox(
+                    height: 10,
+                  ),
+
+                  Card(
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(30),
+                        topRight: Radius.circular(30),
+                        bottomLeft: Radius.circular(30),
+                        bottomRight: Radius.circular(30),
+                      ),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(32.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Welcome!",
+                            style: TextStyle(
+                              color: Color.fromARGB(255, 196, 77, 217),
+                              fontWeight: FontWeight.w500,
+                              fontSize: 32,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+
+                          //email textfield
+                          MyTextFieldP(
+                            controller: emailController,
+                            hintText: 'E-mail',
+                            obscureText: false,
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+
+                          //password textfield
+                          MyTextFieldP(
+                            controller: passwordController,
+                            hintText: 'Password',
+                            obscureText: true,
+                          ),
+
+                          const SizedBox(
+                            height: 10,
+                          ),
+
+                          //confirm password textfield
+                          MyTextFieldP(
+                            controller: confirmPasswordController,
+                            hintText: 'Confirm password',
+                            obscureText: true,
+                          ),
+
+                          const SizedBox(
+                            height: 25,
+                          ),
+
+                          //sign in
+                          MyButtonP(
+                            onTap: signUserUp,
+                            text: 'Sign up',
+                          ),
+
+                          const SizedBox(
+                            height: 10,
+                          ),
+
+                          //continue with
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 25),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Divider(
+                                    thickness: 0.7,
+                                    color: Color.fromARGB(255, 179, 9, 247),
+                                  ),
+                                ),
+                                const Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 10),
+                                  child: Text(
+                                    'Or continue with',
+                                    style: TextStyle(
+                                        color: Color.fromARGB(255, 0, 0, 0)),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Divider(
+                                    thickness: 0.7,
+                                    color: Color.fromARGB(255, 131, 10, 211),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+
+                          const SizedBox(height: 25),
+
+                          //google sign
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              //google button
+                              SquareTile(
+                                onTap: () => AuthService().signInWithGoogle(),
+                                imagePath: 'assets/images/google.png',
+                              ),
+
+                              SizedBox(width: 10),
+
+                              //future buttons
+                            ],
+                          ),
+
+                          const SizedBox(
+                            height: 25,
+                          ),
+                          //not a member? register now
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Text(
+                                'Already have an account?',
+                                style: TextStyle(
+                                    color: Color.fromARGB(255, 0, 0, 0)),
+                              ),
+                              const SizedBox(
+                                width: 4,
+                              ),
+                              GestureDetector(
+                                onTap: widget.onTap,
+                                child: const Text(
+                                  'Login now',
+                                  style: TextStyle(
+                                      color: Color.fromARGB(255, 196, 77, 217),
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
-      
-                  const SizedBox(height: 20),
-      
-                  //email textfield
-                  MyTextField(
-                    controller: emailController,
-                    hintText: 'E-mail',
-                    obscureText: false,
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-      
-                  //password textfield
-                  MyTextField(
-                    controller: passwordController,
-                    hintText: 'Password',
-                    obscureText: true,
-                  ),
-      
-                  const SizedBox(
-                    height: 10,
-                  ),
-      
-                  //confirm password textfield
-                  MyTextField(
-                    controller: confirmPasswordController,
-                    hintText: 'Confirm password',
-                    obscureText: true,
-                  ),
-      
-                  const SizedBox(
-                    height: 25,
-                  ),
-      
-                  //sign in
-                  MyButton(
-                    onTap: signUserUp,
-                    text: 'Sign up',
-                  ),
-      
-                  const SizedBox(
-                    height: 10,
-                  ),
-      
-                  //continue with
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Divider(
-                            thickness: 0.7,
-                            color: Colors.lightBlue[900],
-                          ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10),
-                          child: Text(
-                            'Or continue with',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                        Expanded(
-                          child: Divider(
-                            thickness: 0.7,
-                            color: Colors.lightBlue[900],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-      
-                  const SizedBox(height: 25),
-      
-                  //google sign
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      //google button
-                      SquareTile(
-                        onTap: () => AuthService().signInWithGoogle(),
-                        imagePath: 'assets/images/google.png',),
-      
-                      SizedBox(width: 10),
-      
-                      //future buttons
-                    ],
-                  ),
-      
-                  const SizedBox(
-                    height: 25,
-                  ),
-                  //not a member? register now
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        'Already have an account?',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      const SizedBox(
-                        width: 4,
-                      ),
-                      GestureDetector(
-                        onTap: widget.onTap,
-                        child: const Text(
-                          'Login now',
-                          style: TextStyle(
-                              color: Colors.amber, fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ],
-                  )
                 ],
               ),
             ),
