@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:uniplay/pages/auth_page.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:uniplay/pages/welcome_page.dart';
 import 'database/firebase_options.dart';
 
 void main() async {
@@ -16,9 +17,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  const MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: AuthPage(),
+      home: WelcomePage(),
     );
   }
 }
