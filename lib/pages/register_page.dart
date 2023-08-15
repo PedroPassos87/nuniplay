@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_build_context_synchronously
 
 import 'package:animated_background/animated_background.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -22,6 +22,7 @@ class _RegisterPageState extends State<RegisterPage>
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
+  final userController = TextEditingController();
 
   //sign user up method
   void signUserUp() async {
@@ -144,6 +145,16 @@ class _RegisterPageState extends State<RegisterPage>
                           MyTextFieldP(
                             controller: emailController,
                             hintText: 'E-mail',
+                            obscureText: false,
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+
+                          //user textfield
+                          MyTextFieldP(
+                            controller: userController,
+                            hintText: 'Username',
                             obscureText: false,
                           ),
                           const SizedBox(
