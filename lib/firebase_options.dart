@@ -69,6 +69,7 @@ class DefaultFirebaseOptions {
     projectId: 'uniplay-556bb',
     databaseURL: 'https://uniplay-556bb-default-rtdb.firebaseio.com',
     storageBucket: 'uniplay-556bb.appspot.com',
+    androidClientId: '151306733573-1te3qqjtrbtquplkul5ef5i0psfj8d4u.apps.googleusercontent.com',
     iosClientId: '151306733573-ma3ka8vveafq8fmdo99o6p461ra3aml5.apps.googleusercontent.com',
     iosBundleId: 'com.example.nuniplay',
   );
@@ -80,6 +81,7 @@ class DefaultFirebaseOptions {
     projectId: 'uniplay-556bb',
     databaseURL: 'https://uniplay-556bb-default-rtdb.firebaseio.com',
     storageBucket: 'uniplay-556bb.appspot.com',
+    androidClientId: '151306733573-1te3qqjtrbtquplkul5ef5i0psfj8d4u.apps.googleusercontent.com',
     iosClientId: '151306733573-vtasv92uh3hbfsvd5jbll4vg4a157na5.apps.googleusercontent.com',
     iosBundleId: 'com.example.nuniplay.RunnerTests',
   );

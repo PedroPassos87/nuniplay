@@ -1,12 +1,14 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_build_context_synchronously
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_build_context_synchronously, avoid_single_cascade_in_expression_statements
 
 import 'package:animated_background/animated_background.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:uniplay/components/my_buttonP.dart';
 import 'package:uniplay/components/my_textfieldP.dart';
 import 'package:uniplay/components/square_tile.dart';
 import 'package:uniplay/services/auth_service.dart';
+import 'package:uuid/uuid.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key, required this.onTap}) : super(key: key);
@@ -22,7 +24,20 @@ class _RegisterPageState extends State<RegisterPage>
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
-  final userController = TextEditingController();
+  TextEditingController userController = TextEditingController();
+
+  //instancia do banco cloud firestore
+  FirebaseFirestore db = FirebaseFirestore.instance;
+
+  @override
+  void initState() {
+    //att inicial
+    refresh();
+
+    //att em tempo real
+
+    super.initState();
+  }
 
   //sign user up method
   void signUserUp() async {
@@ -276,6 +291,20 @@ class _RegisterPageState extends State<RegisterPage>
           ),
         ),
       ),
+    );
+  }
+
+  void refresh() async {
+    //att manual
+  }
+
+  void sendData() {
+    //gerar id
+    String id = Uuid().v1();
+    db.collection("users").doc(id).set(
+      {
+        "name": userController.text,
+      },
     );
   }
 }

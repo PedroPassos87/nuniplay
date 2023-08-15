@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "151306733573-1te3qqjtrbtquplkul5ef5i0psfj8d4u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.nuniplay",
+            "certificate_hash": "9a60173e5f03c5aaf311d8198e1c3465b2d585e3"
+          }
+        },
+        {
           "client_id": "151306733573-lt0u40dgkqu637n96csqdilrle1uiman.apps.googleusercontent.com",
           "client_type": 3
         }
