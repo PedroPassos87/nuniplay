@@ -43,83 +43,94 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey[300],
-      appBar: AppBar(
-        title: Text("Profile Page"),
-        foregroundColor: Colors.white,
-        backgroundColor: Colors.grey.shade900,
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            const SizedBox(height: 50),
-            Stack(
-              children: [
-                _image != null
-                    ? CircleAvatar(
-                        radius: 58,
-                        backgroundImage: MemoryImage(_image!),
-                        backgroundColor: Colors.black,
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        Scaffold(
+          appBar: AppBar(
+            title: Text("Profile Page"),
+            foregroundColor: Colors.white,
+            backgroundColor: Color.fromARGB(255, 151, 75, 202),
+          ),
+          body: Container(
+            width: double.infinity,
+            height: MediaQuery.of(context).size.height,
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                  colors: [
+                    Color.fromARGB(255, 220, 184, 245),
+                    Color.fromARGB(255, 193, 113, 247),
+                    Color.fromARGB(255, 151, 6, 247),
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  stops: [0.2, 0.6, 1.0],
+                  tileMode: TileMode.clamp),
+            ),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 50),
+                  Stack(
+                    children: [
+                      _image != null
+                          ? CircleAvatar(
+                              radius: 58,
+                              backgroundImage: MemoryImage(_image!),
+                              backgroundColor: Colors.black,
+                            )
+                          : CircleAvatar(
+                              radius: 58,
+                              backgroundImage:
+                                  ExactAssetImage('assets/images/iconhs.png'),
+                              backgroundColor: Colors.black,
+                            ),
+                      Positioned(
+                        child: IconButton(
+                          onPressed: selectImage,
+                          icon: Icon(Icons.add_a_photo),
+                          color: Color.fromARGB(255, 0, 0, 0),
+                        ),
+                        bottom: -10,
+                        left: 80,
                       )
-                    : CircleAvatar(
-                        radius: 58,
-                        backgroundImage:
-                            ExactAssetImage('assets/images/iconhs.png'),
-                        backgroundColor: Colors.black,
-                      ),
-                Positioned(
-                  child: IconButton(
-                    onPressed: selectImage,
-                    icon: Icon(Icons.add_a_photo),
-                    color: Color.fromARGB(255, 177, 6, 245),
+                    ],
                   ),
-                  bottom: -10,
-                  left: 80,
-                )
-              ],
-            ),
-            // profile pic
+                  // profile pic
 
-            const SizedBox(height: 50),
+                  const SizedBox(height: 50),
 
-            // user details
-            Padding(
-              padding: EdgeInsets.only(left: 0.0),
-              child: Text(
-                'My Details',
-                style: TextStyle(color: Colors.grey.shade600),
+                  // username
+                  MyTextBox(
+                    text: "User124567",
+                    sectionName: 'Username',
+                    onPressed: () => editField('username'),
+                  ),
+
+                  // bio
+                  MyTextBox(
+                    text: 'EMPTY',
+                    sectionName: 'About user',
+                    onPressed: () => editField('bio'),
+                  ),
+
+                  const SizedBox(height: 50),
+
+                  // user posts
+                  Padding(
+                    padding: EdgeInsets.only(left: 25.0),
+                    child: Text(
+                      'User posts: ',
+                      style: TextStyle(color: Colors.grey.shade600),
+                    ),
+                  ),
+                ],
               ),
             ),
-
-            // username
-            MyTextBox(
-              text: "User124567",
-              sectionName: 'Username',
-              onPressed: () => editField('username'),
-            ),
-
-            // bio
-            MyTextBox(
-              text: 'EMPTY',
-              sectionName: 'About user',
-              onPressed: () => editField('bio'),
-            ),
-
-            const SizedBox(height: 50),
-
-            // user posts
-            Padding(
-              padding: EdgeInsets.only(left: 25.0),
-              child: Text(
-                'User posts: ',
-                style: TextStyle(color: Colors.grey.shade600),
-              ),
-            ),
-          ],
+          ),
         ),
-      ),
+      ],
     );
   }
 }
