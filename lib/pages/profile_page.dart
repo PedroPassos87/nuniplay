@@ -78,19 +78,21 @@ class _ProfilePageState extends State<ProfilePage> {
                           ? CircleAvatar(
                               radius: 58,
                               backgroundImage: MemoryImage(_image!),
-                              backgroundColor: Colors.black,
+                              backgroundColor:
+                                  const Color.fromARGB(255, 255, 254, 254),
                             )
                           : CircleAvatar(
                               radius: 58,
                               backgroundImage:
                                   ExactAssetImage('assets/images/iconhs.png'),
-                              backgroundColor: Colors.black,
+                              backgroundColor: Color.fromARGB(255, 3, 3, 3),
                             ),
                       Positioned(
                         child: IconButton(
                           onPressed: selectImage,
                           icon: Icon(Icons.add_a_photo),
-                          color: Color.fromARGB(255, 0, 0, 0),
+                          color: Color.fromARGB(255, 255, 255, 255),
+                          highlightColor: Colors.amber,
                         ),
                         bottom: -10,
                         left: 80,
