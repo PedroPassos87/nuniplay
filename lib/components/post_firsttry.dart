@@ -1,3 +1,5 @@
+// trying to make a post class for the first time. 3 distinct fields etc
+
 import 'package:flutter/material.dart';
 
 class Post extends StatelessWidget {
