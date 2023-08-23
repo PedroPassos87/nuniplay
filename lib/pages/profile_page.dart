@@ -4,6 +4,7 @@ import 'dart:typed_data';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uniplay/components/text_box.dart';
 
@@ -43,14 +44,17 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+
     return Stack(
       fit: StackFit.expand,
       children: [
         Scaffold(
           appBar: AppBar(
-            title: Text("Profile Page"),
-            foregroundColor: Colors.white,
-            backgroundColor: Color.fromARGB(255, 151, 75, 202),
+            foregroundColor: const Color.fromARGB(255, 151, 6, 247),
+            backgroundColor: Color.fromARGB(255, 220, 184, 245),
+            elevation: 0,
           ),
           body: Container(
             width: double.infinity,
@@ -71,9 +75,44 @@ class _ProfilePageState extends State<ProfilePage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 50),
+                  Text(
+                    'MY PROFILE',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 32,
+                      fontFamily: 'arcadeclassic',
+                    ),
+                  ),
+                  const SizedBox(height: 10),
                   Stack(
                     children: [
+                      Container(
+                        height: height * 0.4,
+                        color: Colors.black,
+                        child: LayoutBuilder(
+                          builder: (context, constraints) {
+                            double innerHeight = constraints.maxHeight;
+                            double innerWidth = constraints.maxWidth;
+
+                            return Stack(
+                              children: [
+                                Positioned(
+                                  bottom: 0,
+                                  left: 0,
+                                  right: 0,
+                                  child: Container(
+                                    height: innerHeight * 0.65,
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(30)),
+                                    color: Colors.white,
+                                  ),
+                                )
+                              ],
+                            );
+                          },
+                        ),
+                      ),
                       _image != null
                           ? CircleAvatar(
                               radius: 58,
@@ -92,7 +131,6 @@ class _ProfilePageState extends State<ProfilePage> {
                           onPressed: selectImage,
                           icon: Icon(Icons.add_a_photo),
                           color: Color.fromARGB(255, 255, 255, 255),
-                          highlightColor: Colors.amber,
                         ),
                         bottom: -10,
                         left: 80,
@@ -101,7 +139,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   // profile pic
 
-                  const SizedBox(height: 50),
+                  const SizedBox(height: 30),
 
                   // username
                   MyTextBox(
