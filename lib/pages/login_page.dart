@@ -9,6 +9,8 @@ import 'package:uniplay/components/my_textfieldB.dart';
 import 'package:uniplay/components/square_tile.dart';
 import 'package:uniplay/services/auth_service.dart';
 
+import 'forgot_password_page.dart';
+
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key, required this.onTap}) : super(key: key);
 
@@ -155,16 +157,29 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                           ),
 
                           //forgot password
-                          const Padding(
+                          Padding(
                             padding: EdgeInsets.symmetric(horizontal: 0.0),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                Text(
-                                  'Forgot Password?',
-                                  style: TextStyle(
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) {
+                                          return ForgotPasswordPage();
+                                        },
+                                      ),
+                                    );
+                                  },
+                                  child: Text(
+                                    'Forgot Password?',
+                                    style: TextStyle(
                                       color: Color.fromARGB(255, 3, 78, 240),
-                                      fontWeight: FontWeight.w500),
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
                                 ),
                               ],
                             ),
