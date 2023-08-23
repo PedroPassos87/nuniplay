@@ -4,7 +4,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:uniplay/components/drawer.dart';
-import 'package:uniplay/components/post.dart';
+import 'package:uniplay/components/my_textfieldB.dart';
+import 'package:uniplay/components/post_firsttry.dart';
+import 'package:uniplay/components/post_sectry.dart';
 import 'package:uniplay/pages/profile_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -34,30 +36,28 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // ERROR ???
   // text controllers for each part of the post
-  final titleController = TextEditingController();
-  final bodyController = TextEditingController();
-  final gameCategoryController = TextEditingController();
+  // final titleController = TextEditingController();
+  // final bodyController = TextEditingController();
+  // final gameCategoryController = TextEditingController();
+
+  // text controller
+  final textController = TextEditingController();
 
   //sign out
   void signUserOut() {
     FirebaseAuth.instance.signOut();
   }
 
-  // ERROR ???
+  // method that does the posting itself
   void postMessage() {
     // posts only if theres something on all fields
-    if (titleController.text.isNotEmpty ||
-        bodyController.text.isNotEmpty ||
-        gameCategoryController.text.isNotEmpty) {
+    if (textController.text.isNotEmpty) {
       // stores in firebase
       FirebaseFirestore.instance.collection("User Posts").add({
-        "User Email": currentUser.email,
-        "Post title": titleController.text,
-        "Post body": bodyController.text,
-        "Game Category": gameCategoryController.text,
-        "Timestamp": Timestamp.now(),
+        "Message": textController.text,
+        "UserEmail": currentUser.email,
+        "TimeStamp": Timestamp.now(),
       });
     }
   }
@@ -77,6 +77,8 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
+
+      // sending posts to db
       body: Column(
         children: [
           Expanded(
@@ -93,66 +95,42 @@ class _HomePageState extends State<HomePage> {
                   return ListView.builder(
                     itemCount: snapshot.data!.docs.length,
                     itemBuilder: (context, index) {
+                      // get the actual post
                       final post = snapshot.data!.docs[index];
-                      return Post(
-                        title: post['Title'],
-                        body: post['Body'],
-                        user: post['User'],
-                        gameCategory: post['Category'],
+                      return BasicPost(
+                        body: post['Message'],
+                        user: post['UserEmail'],
                       );
                     },
                   );
                 } else if (snapshot.hasError) {
                   return Center(
-                    child: Text("Erro ao carregar os dados."),
+                    child: Text('Erro: $snapshot.error.toString()'),
                   );
-                } else {
-                  return CircularProgressIndicator(); // Adicione um indicador de carregamento
                 }
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
               },
             ),
           ),
 
           // post something
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 16.0),
-            padding: EdgeInsets.all(8.0),
-            child: Column(
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Row(
               children: [
-                TextField(
-                  controller: titleController,
-                  decoration: InputDecoration(
-                    hintText: 'Title',
-                    border: OutlineInputBorder(),
+                Expanded(
+                  child: MyTextFieldB(
+                    controller: textController,
+                    hintText: "Post something",
+                    obscureText: false,
                   ),
                 ),
-                SizedBox(height: 8.0),
-                TextField(
-                  controller: gameCategoryController,
-                  decoration: InputDecoration(
-                    hintText: 'Game Category',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-                SizedBox(height: 8.0),
-                TextField(
-                  controller: bodyController,
-                  decoration: InputDecoration(
-                    hintText: 'Estou procurando um grupo!',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-                SizedBox(height: 8.0),
-                Row(
-                  children: [
-                    Expanded(
-                      child: ElevatedButton(
-                        onPressed: postMessage,
-                        child: Text('Post'),
-                      ),
-                    ),
-                  ],
-                ),
+                // button
+                IconButton(
+                    onPressed: postMessage,
+                    icon: const Icon(Icons.arrow_circle_up)),
               ],
             ),
           ),
