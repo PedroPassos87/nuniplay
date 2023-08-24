@@ -8,6 +8,8 @@ import 'package:flutter/rendering.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uniplay/components/text_box.dart';
 
+import 'edit_page.dart';
+
 pickImage(ImageSource source) async {
   final ImagePicker _imagePicker = ImagePicker();
   XFile? _file = await _imagePicker.pickImage(source: source);
@@ -75,94 +77,197 @@ class _ProfilePageState extends State<ProfilePage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(
-                    'MY PROFILE',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 32,
-                      fontFamily: 'arcadeclassic',
-                    ),
-                  ),
-                  const SizedBox(height: 10),
                   Stack(
                     children: [
-                      Container(
+                      Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          'MY PROFILE',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 32,
+                            fontFamily: 'arcadeclassic',
+                          ),
+                        ),
+                      ),
+                      SizedBox(
                         height: height * 0.4,
-                        color: Colors.black,
                         child: LayoutBuilder(
                           builder: (context, constraints) {
                             double innerHeight = constraints.maxHeight;
                             double innerWidth = constraints.maxWidth;
 
                             return Stack(
+                              fit: StackFit.expand,
                               children: [
                                 Positioned(
                                   bottom: 0,
                                   left: 0,
                                   right: 0,
-                                  child: Container(
-                                    height: innerHeight * 0.65,
-                                    decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(30)),
-                                    color: Colors.white,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 20, right: 20),
+                                    child: Container(
+                                      height: innerHeight * 0.6,
+                                      width: innerWidth,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(32),
+                                        color:
+                                            Color.fromARGB(255, 255, 255, 255),
+                                      ),
+                                      child: Column(
+                                        children: [
+                                          SizedBox(
+                                            height: 85,
+                                          ),
+                                          Text(
+                                            "User734",
+                                            style: TextStyle(
+                                              color: Color.fromARGB(
+                                                  255, 151, 6, 247),
+                                              fontSize: 22,
+                                              fontWeight: FontWeight.w700,
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            height: 12,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Column(
+                                                children: [
+                                                  Text(
+                                                    'Posts',
+                                                    style: TextStyle(
+                                                      color: Colors.grey[900],
+                                                      fontSize: 21,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    '10',
+                                                    style: TextStyle(
+                                                      color: Color.fromARGB(
+                                                          255, 151, 6, 247),
+                                                      fontSize: 21,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                  horizontal: 20,
+                                                  vertical: 8,
+                                                ),
+                                                child: Container(
+                                                  height: 45,
+                                                  width: 2,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            100),
+                                                    color: Colors.grey,
+                                                  ),
+                                                ),
+                                              ),
+                                              Column(
+                                                children: [
+                                                  Text(
+                                                    'Nota',
+                                                    style: TextStyle(
+                                                      color: Colors.grey[900],
+                                                      fontSize: 21,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    '9.6',
+                                                    style: TextStyle(
+                                                      color: Color.fromARGB(
+                                                          255, 151, 6, 247),
+                                                      fontSize: 21,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                    ),
                                   ),
-                                )
+                                ),
+                                Positioned(
+                                  top: 70,
+                                  right: 0,
+                                  left: 0,
+                                  child: Center(
+                                    child: Container(
+                                      child: _image != null
+                                          ? CircleAvatar(
+                                              radius: 70,
+                                              backgroundImage:
+                                                  MemoryImage(_image!),
+                                              backgroundColor:
+                                                  const Color.fromARGB(
+                                                      255, 255, 254, 254),
+                                            )
+                                          : CircleAvatar(
+                                              radius: 70,
+                                              backgroundImage: ExactAssetImage(
+                                                  'assets/images/iconhs.png'),
+                                              backgroundColor:
+                                                  Color.fromARGB(255, 3, 3, 3),
+                                            ),
+                                    ),
+                                  ),
+                                ),
                               ],
                             );
                           },
                         ),
                       ),
-                      _image != null
-                          ? CircleAvatar(
-                              radius: 58,
-                              backgroundImage: MemoryImage(_image!),
-                              backgroundColor:
-                                  const Color.fromARGB(255, 255, 254, 254),
-                            )
-                          : CircleAvatar(
-                              radius: 58,
-                              backgroundImage:
-                                  ExactAssetImage('assets/images/iconhs.png'),
-                              backgroundColor: Color.fromARGB(255, 3, 3, 3),
-                            ),
-                      Positioned(
-                        child: IconButton(
-                          onPressed: selectImage,
-                          icon: Icon(Icons.add_a_photo),
-                          color: Color.fromARGB(255, 255, 255, 255),
-                        ),
-                        bottom: -10,
-                        left: 80,
-                      )
                     ],
                   ),
-                  // profile pic
-
-                  const SizedBox(height: 30),
-
-                  // username
-                  MyTextBox(
-                    text: "User124567",
-                    sectionName: 'Username',
-                    onPressed: () => editField('username'),
-                  ),
-
-                  // bio
-                  MyTextBox(
-                    text: 'EMPTY',
-                    sectionName: 'About user',
-                    onPressed: () => editField('bio'),
-                  ),
-
-                  const SizedBox(height: 50),
-
-                  // user posts
-                  Padding(
-                    padding: EdgeInsets.only(left: 25.0),
-                    child: Text(
-                      'User posts: ',
-                      style: TextStyle(color: Colors.grey.shade600),
+                  //aqui
+                  Positioned(
+                    bottom: 100,
+                    left: 0,
+                    right: 0,
+                    child: Padding(
+                      padding: const EdgeInsets.all(40.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => editPage(),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          height: 50,
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.all(Radius.circular(30)),
+                          ),
+                          child: const Center(
+                            child: Text(
+                              'Editar perfil ',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500,
+                                color: Color.fromARGB(255, 151, 6, 247),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ],
