@@ -2,9 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:uniplay/pages/auth_page.dart';
-import 'package:uniplay/pages/login_or_register_page.dart';
-import 'package:uniplay/pages/login_page.dart';
-import 'package:uniplay/pages/register_page.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({Key? key}) : super(key: key);

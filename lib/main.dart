@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:uniplay/pages/auth_page.dart';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:uniplay/pages/welcome_page.dart';
 import 'database/firebase_options.dart';
