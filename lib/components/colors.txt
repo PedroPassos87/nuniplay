@@ -1,0 +1,31 @@
+tons de azul
+Color.fromARGB(255, 3, 173, 240)    azul padrao  [DeepSkyBlue]
+Color.fromARGB(255, 0, 102, 153)    azul escuro
+Color.fromARGB(255, 0, 51, 102)     
+Color.fromARGB(255, 153, 204, 255)  azul mais claro
+Color.fromARGB(255, 0, 153, 204)  azul mais intenso
+
+contraste complementar
+Color.fromARGB(255, 255, 149, 0)   perto do ambar porém mais escuro
+Color.fromARGB(255, 242, 70, 2)    laranja denso
+
+
+tom neutro que combina com azul
+Color.fromARGB(255, 224, 224, 224) um cinza leve
+
+
+triade com a cor base 
+Color.fromARGB(255, 3, 173, 240)    azul padrao  [DeepSkyBlue] BASE
+Color.fromARGB(255, 242, 2, 174)    rosa chiclete
+Color.fromARGB(255, 174, 242, 2)    verde limao
+
+constraste forte
+Color.fromARGB(255, 70, 2, 242)  quase em tom de roxo
+
+analogos
+Color.fromARGB(255, 2, 242, 130), verde bem bonito por sinal                 Color.fromARGB(255, 242, 2, 114) rosa para o verde
+Color.fromARGB(255, 10, 2, 242), azul cruzeiro
+
+splits (que por acaso tem nas cores do logo)
+Color.fromARGB(255, 242, 2, 54), vermelho
+Color.fromARGB(255, 242, 190, 2) amarelo

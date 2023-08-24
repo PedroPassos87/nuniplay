@@ -96,7 +96,7 @@ class _RegisterPageState extends State<RegisterPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 196, 77, 217),
+      backgroundColor: Color.fromARGB(255, 2, 242, 130),
       body: AnimatedBackground(
         behaviour: RandomParticleBehaviour(
             options: const ParticleOptions(

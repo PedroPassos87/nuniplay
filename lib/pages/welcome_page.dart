@@ -16,7 +16,7 @@ class WelcomePage extends StatelessWidget {
           gradient: LinearGradient(
               colors: [
                 Color.fromARGB(255, 255, 255, 255),
-                Color.fromARGB(255, 151, 6, 247),
+                Color.fromARGB(255, 3, 173, 240)
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -30,18 +30,25 @@ class WelcomePage extends StatelessWidget {
                 child: Column(
                   children: [
                     const SizedBox(height: 150),
-                    SizedBox(
-                      width: 250,
-                      height: 250,
-                      child: Image(
-                          image: AssetImage("assets/gifs/animacaologo01.gif")),
+                    Align(
+                      alignment: Alignment.center,
+                      child: SizedBox(
+                        width: 250,
+                        height: 250,
+                        child: Image(
+                            image:
+                                AssetImage("assets/gifs/animacaologo01.gif")),
+                      ),
                     ),
-                    const Text(
-                      'UNIPLAY',
-                      style: TextStyle(
-                        fontSize: 45,
-                        color: Colors.white,
-                        fontFamily: 'arcadeclassic',
+                    Align(
+                      alignment: Alignment.center,
+                      child: const Text(
+                        'UNIPLAY',
+                        style: TextStyle(
+                          fontSize: 45,
+                          color: Colors.white,
+                          fontFamily: 'arcadeclassic',
+                        ),
                       ),
                     )
                   ],
@@ -72,8 +79,8 @@ class WelcomePage extends StatelessWidget {
                         child: Text(
                           'Get Started',
                           style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
                           ),
                         ),
                       ),
