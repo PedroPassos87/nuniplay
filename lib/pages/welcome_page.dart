@@ -20,7 +20,7 @@ class WelcomePage extends StatelessWidget {
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              stops: [0.2, 0.6, 1.0],
+              stops: [0.2, 1.0],
               tileMode: TileMode.clamp),
         ),
         child: Center(
