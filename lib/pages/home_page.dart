@@ -5,7 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:uniplay/components/drawer.dart';
 import 'package:uniplay/components/my_textfieldB.dart';
-import 'package:uniplay/components/post_firsttry.dart';
 import 'package:uniplay/components/post_sectry.dart';
 import 'package:uniplay/pages/profile_page.dart';
 
