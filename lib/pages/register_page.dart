@@ -24,10 +24,23 @@ class _RegisterPageState extends State<RegisterPage>
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
-  TextEditingController userController = TextEditingController();
+  final ageController = TextEditingController();
+  final collegeController = TextEditingController();
+  final nickController = TextEditingController();
 
   //instancia do banco cloud firestore
   FirebaseFirestore db = FirebaseFirestore.instance;
+
+  @override
+  void dispose() {
+    super.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+    ageController.dispose();
+    collegeController.dispose();
+    nickController.dispose();
+  }
 
   @override
   void initState() {
@@ -96,195 +109,214 @@ class _RegisterPageState extends State<RegisterPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 2, 242, 130),
-      body: AnimatedBackground(
-        behaviour: RandomParticleBehaviour(
-            options: const ParticleOptions(
-          spawnMaxRadius: 30,
-          spawnMinSpeed: 10.00,
-          particleCount: 60,
-          spawnMaxSpeed: 50.00,
-          minOpacity: 0.1,
-          spawnOpacity: 0.3,
-          image: Image(image: AssetImage('assets/images/ship.png')),
-        )),
-        vsync: this,
+      backgroundColor: Color.fromARGB(255, 0, 102, 153),
+      body: Container(
+        width: double.infinity,
+        height: MediaQuery.of(context).size.height,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+              colors: [
+                Color.fromARGB(255, 3, 173, 240),
+                Color.fromARGB(255, 0, 102, 153),
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              stops: [0.4, 1.0],
+              tileMode: TileMode.clamp),
+        ),
         child: SafeArea(
           child: Center(
             child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  //logo
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        'assets/images/logounipng.png',
-                        height: 175,
-                      ),
-                    ],
-                  ),
-
                   const SizedBox(
                     height: 10,
                   ),
 
-                  Card(
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30),
-                        bottomLeft: Radius.circular(30),
-                        bottomRight: Radius.circular(30),
-                      ),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(32.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Welcome!",
+                  Padding(
+                    padding: const EdgeInsets.all(32.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                            "WELCOME",
                             style: TextStyle(
-                              color: Color.fromARGB(255, 196, 77, 217),
+                              color: Color.fromARGB(255, 0, 51, 102),
                               fontWeight: FontWeight.w500,
-                              fontSize: 32,
+                              fontSize: 38,
                             ),
                           ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-
-                          //email textfield
-                          MyTextFieldP(
-                            controller: emailController,
-                            hintText: 'E-mail',
-                            obscureText: false,
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-
-                          //user textfield
-                          MyTextFieldP(
-                            controller: userController,
-                            hintText: 'Username',
-                            obscureText: false,
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-
-                          //password textfield
-                          MyTextFieldP(
-                            controller: passwordController,
-                            hintText: 'Password',
-                            obscureText: true,
-                          ),
-
-                          const SizedBox(
-                            height: 10,
-                          ),
-
-                          //confirm password textfield
-                          MyTextFieldP(
-                            controller: confirmPasswordController,
-                            hintText: 'Confirm password',
-                            obscureText: true,
-                          ),
-
-                          const SizedBox(
-                            height: 25,
-                          ),
-
-                          //sign in
-                          MyButtonP(
-                            onTap: signUserUp,
-                            text: 'Sign up',
-                          ),
-
-                          const SizedBox(
-                            height: 10,
-                          ),
-
-                          //continue with
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 25),
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  child: Divider(
-                                    thickness: 0.7,
-                                    color: Color.fromARGB(255, 179, 9, 247),
-                                  ),
-                                ),
-                                const Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 10),
-                                  child: Text(
-                                    'Or continue with',
-                                    style: TextStyle(
-                                        color: Color.fromARGB(255, 0, 0, 0)),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Divider(
-                                    thickness: 0.7,
-                                    color: Color.fromARGB(255, 131, 10, 211),
-                                  ),
-                                ),
-                              ],
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                            "Register below with your details",
+                            style: TextStyle(
+                              color: Color.fromARGB(255, 0, 51, 102),
+                              fontWeight: FontWeight.w500,
+                              fontSize: 14,
                             ),
                           ),
+                        ),
+                        const SizedBox(
+                          height: 50,
+                        ),
 
-                          const SizedBox(height: 25),
+                        //first name textfield
+                        MyTextFieldP(
+                          controller: nickController,
+                          hintText: 'Username',
+                          obscureText: false,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
 
-                          //google sign
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                        //last name
+                        MyTextFieldP(
+                          controller: collegeController,
+                          hintText: 'College',
+                          obscureText: false,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+
+                        //age
+                        MyTextFieldP(
+                          controller: ageController,
+                          hintText: 'Age',
+                          obscureText: false,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+
+                        //email textfield
+                        MyTextFieldP(
+                          controller: emailController,
+                          hintText: 'E-mail',
+                          obscureText: false,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+
+                        //password textfield
+                        MyTextFieldP(
+                          controller: passwordController,
+                          hintText: 'Password',
+                          obscureText: true,
+                        ),
+
+                        const SizedBox(
+                          height: 10,
+                        ),
+
+                        //confirm password textfield
+                        MyTextFieldP(
+                          controller: confirmPasswordController,
+                          hintText: 'Confirm password',
+                          obscureText: true,
+                        ),
+
+                        const SizedBox(
+                          height: 25,
+                        ),
+
+                        //sign in
+                        MyButtonP(
+                          onTap: signUserUp,
+                          text: 'Sign up',
+                        ),
+
+                        const SizedBox(
+                          height: 10,
+                        ),
+
+                        //continue with
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 25),
+                          child: Row(
                             children: [
-                              //google button
-                              SquareTile(
-                                onTap: () => AuthService().signInWithGoogle(),
-                                imagePath: 'assets/images/google.png',
+                              Expanded(
+                                child: Divider(
+                                  thickness: 0.7,
+                                  color: Color.fromARGB(255, 179, 9, 247),
+                                ),
                               ),
-
-                              SizedBox(width: 10),
-
-                              //future buttons
-                            ],
-                          ),
-
-                          const SizedBox(
-                            height: 25,
-                          ),
-                          //not a member? register now
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Text(
-                                'Already have an account?',
-                                style: TextStyle(
-                                    color: Color.fromARGB(255, 0, 0, 0)),
-                              ),
-                              const SizedBox(
-                                width: 4,
-                              ),
-                              GestureDetector(
-                                onTap: widget.onTap,
-                                child: const Text(
-                                  'Login now',
+                              const Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 10),
+                                child: Text(
+                                  'Or continue with',
                                   style: TextStyle(
-                                      color: Color.fromARGB(255, 196, 77, 217),
-                                      fontWeight: FontWeight.bold),
+                                      color: Color.fromARGB(255, 0, 0, 0)),
+                                ),
+                              ),
+                              Expanded(
+                                child: Divider(
+                                  thickness: 0.7,
+                                  color: Color.fromARGB(255, 131, 10, 211),
                                 ),
                               ),
                             ],
-                          )
-                        ],
-                      ),
+                          ),
+                        ),
+
+                        const SizedBox(height: 25),
+
+                        //google sign
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            //google button
+                            SquareTile(
+                              onTap: () => AuthService().signInWithGoogle(),
+                              imagePath: 'assets/images/google.png',
+                            ),
+
+                            SizedBox(width: 10),
+
+                            //future buttons
+                          ],
+                        ),
+
+                        const SizedBox(
+                          height: 25,
+                        ),
+                        //not a member? register now
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text(
+                              'Already have an account?',
+                              style: TextStyle(
+                                  color: Color.fromARGB(255, 0, 0, 0)),
+                            ),
+                            const SizedBox(
+                              width: 4,
+                            ),
+                            GestureDetector(
+                              onTap: widget.onTap,
+                              child: const Text(
+                                'Login now',
+                                style: TextStyle(
+                                    color: Color.fromARGB(255, 196, 77, 217),
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
                     ),
                   ),
+                  //  ),
                 ],
               ),
             ),
@@ -303,7 +335,7 @@ class _RegisterPageState extends State<RegisterPage>
     String id = Uuid().v1();
     db.collection("users").doc(id).set(
       {
-        "name": userController.text,
+        //"name": userController.text,
       },
     );
   }

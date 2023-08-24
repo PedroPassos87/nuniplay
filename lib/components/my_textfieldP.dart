@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 
 class MyTextFieldP extends StatelessWidget {
@@ -20,15 +22,24 @@ class MyTextFieldP extends StatelessWidget {
         controller: controller,
         obscureText: obscureText,
         decoration: InputDecoration(
-          enabledBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: Color.fromARGB(0, 118, 2, 250))),
-          focusedBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: Color.fromARGB(0, 96, 125, 139))),
-          fillColor: Color.fromARGB(255, 159, 96, 218).withOpacity(0.2),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Color.fromARGB(0, 118, 2, 250),
+            ),
+            borderRadius: BorderRadius.all(
+              Radius.circular(18),
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Color.fromARGB(0, 96, 125, 139),
+            ),
+          ),
+          fillColor: Color.fromARGB(255, 252, 252, 252).withOpacity(0.6),
           filled: true,
           hintText: hintText,
           hintStyle: const TextStyle(
-              color: Color.fromARGB(200, 166, 79, 224),
+              color: Color.fromARGB(255, 0, 51, 102),
               fontSize: 16,
               fontWeight: FontWeight.bold),
         ),

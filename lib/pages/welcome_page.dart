@@ -15,12 +15,12 @@ class WelcomePage extends StatelessWidget {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
               colors: [
-                Color.fromARGB(255, 255, 255, 255),
-                Color.fromARGB(255, 3, 173, 240)
+                Color.fromARGB(255, 3, 173, 240),
+                Color.fromARGB(255, 0, 102, 153),
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              stops: [0.2, 1.0],
+              stops: [0.2, 0.6, 1.0],
               tileMode: TileMode.clamp),
         ),
         child: Center(

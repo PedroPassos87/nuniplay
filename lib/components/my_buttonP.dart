@@ -14,18 +14,18 @@ class MyButtonP extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.all(25),
-        margin: const EdgeInsets.symmetric(horizontal: 75),
+        padding: const EdgeInsets.all(20),
+        margin: const EdgeInsets.symmetric(horizontal: 85),
         decoration: BoxDecoration(
-          color: Color.fromARGB(255, 196, 77, 217),
+          color: Color.fromARGB(255, 255, 255, 255),
           borderRadius: BorderRadius.circular(8),
         ),
         child: Center(
           child: Text(
             text,
             style: const TextStyle(
-              color: Colors.white,
-              fontSize: 16,
+              color: Color.fromARGB(255, 0, 51, 102),
+              fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
           ),
