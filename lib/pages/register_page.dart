@@ -27,6 +27,7 @@ class _RegisterPageState extends State<RegisterPage>
   final ageController = TextEditingController();
   final collegeController = TextEditingController();
   final nickController = TextEditingController();
+  final nameController = TextEditingController();
 
   //instancia do banco cloud firestore
   FirebaseFirestore db = FirebaseFirestore.instance;
@@ -53,8 +54,9 @@ class _RegisterPageState extends State<RegisterPage>
   }
 
   //sign user up method
-  void signUserUp() async {
+  Future signUserUp() async {
     //show loading circle ---> in the future change for an animation
+    /*
     showDialog(
       context: context,
       builder: (context) {
@@ -83,6 +85,50 @@ class _RegisterPageState extends State<RegisterPage>
       //pop the loading circle
       Navigator.pop(context);
       showErrorMessage(e.code);
+    }
+    */
+    //authenticate user
+    if (passwordConfirmed()) {
+      //create user
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+      //add user details
+      addUserDetails(
+        nameController.text.trim(),
+        nickController.text.trim(),
+        collegeController.text.trim(),
+        int.parse(ageController.text.trim()),
+        emailController.text.trim(),
+      );
+    }
+  }
+
+  Future addUserDetails(
+    String name,
+    String username,
+    String college,
+    int age,
+    String email,
+  ) async {
+    await FirebaseFirestore.instance.collection('users').add(
+      {
+        'name': name,
+        'username': username,
+        'college': college,
+        'age': age,
+        'email': email,
+      },
+    );
+  }
+
+  bool passwordConfirmed() {
+    if (passwordController.text.trim() ==
+        confirmPasswordController.text.trim()) {
+      return true;
+    } else {
+      return false;
     }
   }
 
@@ -168,6 +214,16 @@ class _RegisterPageState extends State<RegisterPage>
 
                         //first name textfield
                         MyTextField(
+                          controller: nameController,
+                          hintText: 'Name',
+                          obscureText: false,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+
+                        //nick textfield
+                        MyTextField(
                           controller: nickController,
                           hintText: 'Username',
                           obscureText: false,
@@ -176,7 +232,7 @@ class _RegisterPageState extends State<RegisterPage>
                           height: 10,
                         ),
 
-                        //last name
+                        //faculdade
                         MyTextField(
                           controller: collegeController,
                           hintText: 'College',
