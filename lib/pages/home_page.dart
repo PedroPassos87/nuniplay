@@ -167,7 +167,7 @@ class _HomePageState extends State<HomePage> {
           children: <Widget>[
             IconButton(
               icon: Icon(Icons.menu),
-              onPressed: () {},
+              onPressed: goToProfilePage,
             ),
             IconButton(
               icon: Icon(Icons.search),
