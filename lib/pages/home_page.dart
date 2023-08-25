@@ -3,7 +3,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:uniplay/components/drawer.dart';
 import 'package:uniplay/components/my_textfield.dart';
 import 'package:uniplay/components/post_secenhanced.dart';
 import 'package:uniplay/pages/profile_page.dart';
@@ -52,7 +51,7 @@ class _HomePageState extends State<HomePage> {
         titleController.text.isNotEmpty &&
         gameCategoryController.text.isNotEmpty) {
       // stores in firebase
-      FirebaseFirestore.instance.collection("User Posts").add({
+      FirebaseFirestore.instance.collection("Posts").add({
         "Title": titleController.text,
         "GameCat": gameCategoryController.text,
         "Body": bodyController.text,
@@ -85,7 +84,7 @@ class _HomePageState extends State<HomePage> {
           Expanded(
             child: StreamBuilder(
               stream: FirebaseFirestore.instance
-                  .collection("User Posts")
+                  .collection("Posts")
                   .orderBy(
                     "TimeStamp",
                     descending: false,
@@ -180,8 +179,21 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      drawer: MyDrawer(
-        onProfileTap: goToProfilePage,
+      bottomNavigationBar: BottomAppBar(
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            IconButton(
+              icon: Icon(Icons.menu),
+              onPressed: () {},
+            ),
+            IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () {},
+            ),
+          ],
+        ),
       ),
     );
   }
