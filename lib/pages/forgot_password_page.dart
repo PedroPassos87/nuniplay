@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:uniplay/pages/auth_page.dart';
 
-import '../components/my_textfieldB.dart';
+import '../components/my_textfield.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({super.key});
@@ -92,7 +92,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   const SizedBox(height: 12),
 
                   //email textfield
-                  MyTextFieldB(
+                  MyTextField(
                     controller: _emailController,
                     hintText: 'E-mail',
                     obscureText: false,

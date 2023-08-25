@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:uniplay/components/drawer.dart';
-import 'package:uniplay/components/my_textfieldB.dart';
+import 'package:uniplay/components/my_textfield.dart';
 import 'package:uniplay/components/post_sectry.dart';
 import 'package:uniplay/pages/profile_page.dart';
 
@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white54,
+      backgroundColor: Color.fromARGB(136, 218, 218, 218),
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         foregroundColor: Colors.lightBlueAccent,
@@ -121,7 +121,7 @@ class _HomePageState extends State<HomePage> {
             child: Row(
               children: [
                 Expanded(
-                  child: MyTextFieldB(
+                  child: MyTextField(
                     controller: textController,
                     hintText: "Post something",
                     obscureText: false,
