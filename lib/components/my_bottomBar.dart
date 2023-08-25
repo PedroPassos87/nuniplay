@@ -1,20 +1,51 @@
 import 'package:flutter/material.dart';
-import '';
-import '';
+import '../pages/edit_page.dart';
+import '../pages/home_page.dart';
+import '../pages/profile_page.dart';
 
 class MyNavigationBar extends StatelessWidget {
-  final Function() onProfilePressed;
-  final Function() onHomePressed;
-  final Function() onEditPressed;
-
-  MyNavigationBar({
-    required this.onProfilePressed,
-    required this.onHomePressed,
-    required this.onEditPressed,
-  });
-
   @override
   Widget build(BuildContext context) {
+    
+    void goToHomePage() {
+      // pop menu drawer
+      Navigator.pop(context);
+
+      // go to home page
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => HomePage(),
+        ),
+      );
+    }
+
+    void goToProfilePage() {
+      // pop menu drawer
+      Navigator.pop(context);
+
+      // go to profile page
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ProfilePage(),
+        ),
+      );
+    }
+
+    void goToEditPage() {
+      // pop menu drawer
+      Navigator.pop(context);
+
+      // go to home page
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => editPage(),
+        ),
+      );
+    }
+
     return BottomAppBar(
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -22,17 +53,17 @@ class MyNavigationBar extends StatelessWidget {
         children: <Widget>[
           IconButton(
             icon: Icon(Icons.person),
-            onPressed: onProfilePressed,
+            onPressed: goToProfilePage,
           ),
           SizedBox(width: 20),
           IconButton(
             icon: Icon(Icons.home),
-            onPressed: onHomePressed,
+            onPressed: goToHomePage,
           ),
           SizedBox(width: 20),
           IconButton(
             icon: Icon(Icons.settings),
-            onPressed: onEditPressed,
+            onPressed: goToEditPage,
           ),
           SizedBox(width: 20),
         ],

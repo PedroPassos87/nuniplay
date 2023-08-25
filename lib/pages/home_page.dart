@@ -22,46 +22,6 @@ class _HomePageState extends State<HomePage> {
   // user
   final currentUser = FirebaseAuth.instance.currentUser!;
 
-  // navigate to profile
-  void goToProfilePage() {
-    // pop menu drawer
-    Navigator.pop(context);
-
-    // go to profile page
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => ProfilePage(),
-      ),
-    );
-  }
-
-  void goToHomePage() {
-    // pop menu drawer
-    Navigator.pop(context);
-
-    // go to home page
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => HomePage(),
-      ),
-    );
-  }
-
-  void goToEditPage() {
-    // pop menu drawer
-    Navigator.pop(context);
-
-    // go to home page
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => editPage(),
-      ),
-    );
-  }
-
   // text controllers for each part of the post
   final titleController = TextEditingController();
   final bodyController = TextEditingController();
@@ -188,11 +148,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      bottomNavigationBar: MyNavigationBar(
-        onHomePressed: goToHomePage,
-        onProfilePressed: goToProfilePage,
-        onEditPressed: goToEditPage,
-      ),
+      bottomNavigationBar: MyNavigationBar(),
     );
   }
 }

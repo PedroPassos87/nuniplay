@@ -3,6 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:uniplay/components/my_bottomBar.dart';
 import 'package:uniplay/database/get_user_nick.dart';
 
 class editPage extends StatefulWidget {
@@ -53,6 +54,7 @@ class _editPageState extends State<editPage> {
           )
         ],
       )),
+      bottomNavigationBar: MyNavigationBar(),
     );
   }
 }
