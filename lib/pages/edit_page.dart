@@ -13,34 +13,6 @@ class editPage extends StatefulWidget {
 }
 
 class _editPageState extends State<editPage> {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-
-  String userName = "";
-
-  @override
-  void initState() {
-    super.initState();
-    fetchUserData();
-  }
-
-  Future<void> fetchUserData() async {
-    try {
-      User? user = _auth.currentUser;
-
-      if (user != null) {
-        DocumentSnapshot userSnapshot =
-            await _firestore.collection("users").doc(user.uid).get();
-
-        setState(() {
-          userName = userSnapshot.get("username");
-        });
-      }
-    } catch (e) {
-      print("Erro ao recuperar dados do usuário: $e");
-    }
-  }
-
 //document ids
   List<String> docIDs = [];
 
@@ -58,37 +30,29 @@ class _editPageState extends State<editPage> {
 
   @override
   Widget build(BuildContext context) {
-    return /*Scaffold(
+    return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
-              child: FutureBuilder(
-            future: getDocId(),
-            builder: (context, snapshot) {
-              return ListView.builder(
-                itemCount: docIDs.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    title: GetUserNick(documentId: docIDs[index]),
-                  );
-                },
-              );
-            },
-          ))
+            child: FutureBuilder(
+              future: getDocId(),
+              builder: (context, snapshot) {
+                return ListView.builder(
+                  itemCount: docIDs.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      title: GetUserNick(documentId: docIDs[index]),
+                    );
+                  },
+                );
+              },
+            ),
+          )
         ],
       )),
-    );*/
-
-        Scaffold(
-      appBar: AppBar(
-        title: Text("Dados do Usuário"),
-      ),
-      body: Center(
-        child: Text("Nome do Usuário:$userName"),
-      ),
     );
   }
 }
