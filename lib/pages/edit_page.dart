@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:uniplay/database/get_user_nick.dart';
 
@@ -12,6 +13,34 @@ class editPage extends StatefulWidget {
 }
 
 class _editPageState extends State<editPage> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  String userName = "";
+
+  @override
+  void initState() {
+    super.initState();
+    fetchUserData();
+  }
+
+  Future<void> fetchUserData() async {
+    try {
+      User? user = _auth.currentUser;
+
+      if (user != null) {
+        DocumentSnapshot userSnapshot =
+            await _firestore.collection("users").doc(user.uid).get();
+
+        setState(() {
+          userName = userSnapshot.get("username");
+        });
+      }
+    } catch (e) {
+      print("Erro ao recuperar dados do usuário: $e");
+    }
+  }
+
 //document ids
   List<String> docIDs = [];
 
@@ -29,7 +58,7 @@ class _editPageState extends State<editPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return /*Scaffold(
       backgroundColor: Colors.white,
       body: Center(
           child: Column(
@@ -51,6 +80,15 @@ class _editPageState extends State<editPage> {
           ))
         ],
       )),
+    );*/
+
+        Scaffold(
+      appBar: AppBar(
+        title: Text("Dados do Usuário"),
+      ),
+      body: Center(
+        child: Text("Nome do Usuário:$userName"),
+      ),
     );
   }
 }

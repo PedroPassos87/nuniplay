@@ -135,7 +135,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                           SizedBox(
                                             height: 85,
                                           ),
-                                          Expanded(
+                                          /*Expanded(
                                             child: FutureBuilder(
                                               future: getDocId(),
                                               builder: (context, snapshot) {
@@ -153,7 +153,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                                 );
                                               },
                                             ),
-                                          ),
+                                          ),*/
                                           const SizedBox(
                                             height: 12,
                                           ),
