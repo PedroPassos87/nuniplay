@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:uniplay/components/drawer.dart';
 import 'package:uniplay/components/my_textfield.dart';
 import 'package:uniplay/components/post_secenhanced.dart';
-import 'package:uniplay/components/post_sectry.dart';
 import 'package:uniplay/pages/profile_page.dart';
 
 class HomePage extends StatefulWidget {
