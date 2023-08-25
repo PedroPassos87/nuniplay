@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'home_page.dart';
 import 'package:image_picker/image_picker.dart';
-import '../database/get_user_nick.dart';
 import 'edit_page.dart';
 
 pickImage(ImageSource source) async {
@@ -48,7 +47,7 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
     );
   }
-  
+
   void selectImage() async {
     Uint8List img = await pickImage(ImageSource.gallery);
 
