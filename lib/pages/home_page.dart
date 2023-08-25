@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:uniplay/components/drawer.dart';
 import 'package:uniplay/components/my_textfieldB.dart';
+import 'package:uniplay/components/post_secenhanced.dart';
 import 'package:uniplay/components/post_sectry.dart';
 import 'package:uniplay/pages/profile_page.dart';
 
@@ -36,12 +37,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   // text controllers for each part of the post
-  // final titleController = TextEditingController();
-  // final bodyController = TextEditingController();
-  // final gameCategoryController = TextEditingController();
-
-  // text controller
-  final textController = TextEditingController();
+  final titleController = TextEditingController();
+  final bodyController = TextEditingController();
+  final gameCategoryController = TextEditingController();
 
   //sign out
   void signUserOut() {
@@ -51,10 +49,14 @@ class _HomePageState extends State<HomePage> {
   // method that does the posting itself
   void postMessage() {
     // posts only if theres something on all fields
-    if (textController.text.isNotEmpty) {
+    if (bodyController.text.isNotEmpty &&
+        titleController.text.isNotEmpty &&
+        gameCategoryController.text.isNotEmpty) {
       // stores in firebase
       FirebaseFirestore.instance.collection("User Posts").add({
-        "Message": textController.text,
+        "Title": titleController.text,
+        "GameCat": gameCategoryController.text,
+        "Body": bodyController.text,
         "UserEmail": currentUser.email,
         "TimeStamp": Timestamp.now(),
       });
@@ -97,8 +99,10 @@ class _HomePageState extends State<HomePage> {
                     itemBuilder: (context, index) {
                       // get the actual post
                       final post = snapshot.data!.docs[index];
-                      return BasicPost(
-                        body: post['Message'],
+                      return EnhancedPost(
+                        title: post['Title'],
+                        gameCategory: post['GameCat'],
+                        body: post['Body'],
                         user: post['UserEmail'],
                       );
                     },
@@ -118,19 +122,36 @@ class _HomePageState extends State<HomePage> {
           // post something
           Padding(
             padding: const EdgeInsets.all(20.0),
-            child: Row(
+            child: Column(
               children: [
-                Expanded(
-                  child: MyTextFieldB(
-                    controller: textController,
-                    hintText: "Post something",
-                    obscureText: false,
-                  ),
+                MyTextFieldB(
+                  controller: titleController,
+                  hintText: "Title",
+                  obscureText: false,
                 ),
-                // button
-                IconButton(
-                    onPressed: postMessage,
-                    icon: const Icon(Icons.arrow_circle_up)),
+                SizedBox(height: 10), // Add some spacing between fields
+                MyTextFieldB(
+                  controller: bodyController,
+                  hintText: "Post something",
+                  obscureText: false,
+                ),
+                SizedBox(height: 10), // Add some spacing between fields
+                MyTextFieldB(
+                  controller: gameCategoryController,
+                  hintText: "Game Category",
+                  obscureText: false,
+                ),
+                SizedBox(height: 10), // Add some spacing between fields
+                Row(
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: postMessage,
+                        child: Icon(Icons.arrow_circle_up),
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
