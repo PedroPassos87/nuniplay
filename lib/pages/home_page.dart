@@ -3,9 +3,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:uniplay/components/my_bottomBar.dart';
 import 'package:uniplay/components/my_textfield.dart';
 import 'package:uniplay/components/post_secenhanced.dart';
 import 'package:uniplay/pages/profile_page.dart';
+import 'edit_page.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({super.key});
@@ -43,6 +45,19 @@ class _HomePageState extends State<HomePage> {
       context,
       MaterialPageRoute(
         builder: (context) => HomePage(),
+      ),
+    );
+  }
+
+  void goToEditPage() {
+    // pop menu drawer
+    Navigator.pop(context);
+
+    // go to home page
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => editPage(),
       ),
     );
   }
@@ -173,21 +188,10 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      bottomNavigationBar: BottomAppBar(
-        child: Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            IconButton(
-              icon: Icon(Icons.menu),
-              onPressed: goToProfilePage,
-            ),
-            IconButton(
-              icon: Icon(Icons.search),
-              onPressed: () {},
-            ),
-          ],
-        ),
+      bottomNavigationBar: MyNavigationBar(
+        onHomePressed: goToHomePage,
+        onProfilePressed: goToProfilePage,
+        onEditPressed: goToEditPage,
       ),
     );
   }
