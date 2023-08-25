@@ -37,19 +37,20 @@ class _editPageState extends State<editPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
-              child: FutureBuilder(
-            future: getDocId(),
-            builder: (context, snapshot) {
-              return ListView.builder(
-                itemCount: docIDs.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    title: GetUserNick(documentId: docIDs[index]),
-                  );
-                },
-              );
-            },
-          ))
+            child: FutureBuilder(
+              future: getDocId(),
+              builder: (context, snapshot) {
+                return ListView.builder(
+                  itemCount: docIDs.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      title: GetUserNick(documentId: docIDs[index]),
+                    );
+                  },
+                );
+              },
+            ),
+          )
         ],
       )),
     );
