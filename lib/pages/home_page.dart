@@ -22,10 +22,19 @@ class _HomePageState extends State<HomePage> {
   // user
   final currentUser = FirebaseAuth.instance.currentUser!;
 
+  // tracks if it should show the posting fields or not
+  bool showPostFields = false;
+
   // text controllers for each part of the post
   final titleController = TextEditingController();
   final bodyController = TextEditingController();
   final gameCategoryController = TextEditingController();
+
+  void togglePostFields() {
+    setState(() {
+      showPostFields = !showPostFields;
+    });
+  }
 
   //sign out
   void signUserOut() {
@@ -105,47 +114,54 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
 
-          // post something
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              children: [
-                MyTextField(
-                  controller: titleController,
-                  hintText: "Title",
-                  obscureText: false,
-                ),
-                SizedBox(height: 10), // Add some spacing between fields
-                MyTextField(
-                  controller: bodyController,
-                  hintText: "Post something",
-                  obscureText: false,
-                ),
-                SizedBox(height: 10), // Add some spacing between fields
-                MyTextField(
-                  controller: gameCategoryController,
-                  hintText: "Game Category",
-                  obscureText: false,
-                ),
-                SizedBox(height: 10), // Add some spacing between fields
-                Row(
-                  children: [
-                    Expanded(
-                      child: ElevatedButton(
-                        onPressed: () {
-                          postMessage();
-                          titleController.clear();
-                          bodyController.clear();
-                          gameCategoryController.clear();
-                        },
-                        child: Icon(Icons.arrow_circle_up),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+          // Toggle post fields button
+          ElevatedButton(
+            onPressed: togglePostFields,
+            child: Text('Postagem'),
           ),
+
+          // post something
+          if (showPostFields)
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                children: [
+                  MyTextField(
+                    controller: titleController,
+                    hintText: "Title",
+                    obscureText: false,
+                  ),
+                  SizedBox(height: 10), // Add some spacing between fields
+                  MyTextField(
+                    controller: bodyController,
+                    hintText: "Post something",
+                    obscureText: false,
+                  ),
+                  SizedBox(height: 10), // Add some spacing between fields
+                  MyTextField(
+                    controller: gameCategoryController,
+                    hintText: "Game Category",
+                    obscureText: false,
+                  ),
+                  SizedBox(height: 10), // Add some spacing between fields
+                  Row(
+                    children: [
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: () {
+                            postMessage();
+                            titleController.clear();
+                            bodyController.clear();
+                            gameCategoryController.clear();
+                          },
+                          child: Icon(Icons.arrow_circle_up),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
         ],
       ),
       bottomNavigationBar: MyNavigationBar(),
