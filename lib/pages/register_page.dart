@@ -5,7 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:uniplay/components/my_buttonP.dart';
-import 'package:uniplay/components/my_textfieldP.dart';
+import 'package:uniplay/components/my_textfield.dart';
 import 'package:uniplay/components/square_tile.dart';
 import 'package:uniplay/services/auth_service.dart';
 import 'package:uuid/uuid.dart';
@@ -27,6 +27,7 @@ class _RegisterPageState extends State<RegisterPage>
   final ageController = TextEditingController();
   final collegeController = TextEditingController();
   final nickController = TextEditingController();
+  final nameController = TextEditingController();
 
   //instancia do banco cloud firestore
   FirebaseFirestore db = FirebaseFirestore.instance;
@@ -53,8 +54,9 @@ class _RegisterPageState extends State<RegisterPage>
   }
 
   //sign user up method
-  void signUserUp() async {
+  Future signUserUp() async {
     //show loading circle ---> in the future change for an animation
+    /*
     showDialog(
       context: context,
       builder: (context) {
@@ -83,6 +85,50 @@ class _RegisterPageState extends State<RegisterPage>
       //pop the loading circle
       Navigator.pop(context);
       showErrorMessage(e.code);
+    }
+    */
+    //authenticate user
+    if (passwordConfirmed()) {
+      //create user
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+      //add user details
+      addUserDetails(
+        nameController.text.trim(),
+        nickController.text.trim(),
+        collegeController.text.trim(),
+        int.parse(ageController.text.trim()),
+        emailController.text.trim(),
+      );
+    }
+  }
+
+  Future addUserDetails(
+    String name,
+    String username,
+    String college,
+    int age,
+    String email,
+  ) async {
+    await FirebaseFirestore.instance.collection('users').add(
+      {
+        'name': name,
+        'username': username,
+        'college': college,
+        'age': age,
+        'email': email,
+      },
+    );
+  }
+
+  bool passwordConfirmed() {
+    if (passwordController.text.trim() ==
+        confirmPasswordController.text.trim()) {
+      return true;
+    } else {
+      return false;
     }
   }
 
@@ -150,9 +196,7 @@ class _RegisterPageState extends State<RegisterPage>
                             ),
                           ),
                         ),
-                        const SizedBox(
-                          height: 10,
-                        ),
+
                         Align(
                           alignment: Alignment.center,
                           child: Text(
@@ -165,11 +209,21 @@ class _RegisterPageState extends State<RegisterPage>
                           ),
                         ),
                         const SizedBox(
-                          height: 50,
+                          height: 20,
                         ),
 
                         //first name textfield
-                        MyTextFieldP(
+                        MyTextField(
+                          controller: nameController,
+                          hintText: 'Name',
+                          obscureText: false,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+
+                        //nick textfield
+                        MyTextField(
                           controller: nickController,
                           hintText: 'Username',
                           obscureText: false,
@@ -178,8 +232,8 @@ class _RegisterPageState extends State<RegisterPage>
                           height: 10,
                         ),
 
-                        //last name
-                        MyTextFieldP(
+                        //faculdade
+                        MyTextField(
                           controller: collegeController,
                           hintText: 'College',
                           obscureText: false,
@@ -189,7 +243,7 @@ class _RegisterPageState extends State<RegisterPage>
                         ),
 
                         //age
-                        MyTextFieldP(
+                        MyTextField(
                           controller: ageController,
                           hintText: 'Age',
                           obscureText: false,
@@ -199,7 +253,7 @@ class _RegisterPageState extends State<RegisterPage>
                         ),
 
                         //email textfield
-                        MyTextFieldP(
+                        MyTextField(
                           controller: emailController,
                           hintText: 'E-mail',
                           obscureText: false,
@@ -209,7 +263,7 @@ class _RegisterPageState extends State<RegisterPage>
                         ),
 
                         //password textfield
-                        MyTextFieldP(
+                        MyTextField(
                           controller: passwordController,
                           hintText: 'Password',
                           obscureText: true,
@@ -220,7 +274,7 @@ class _RegisterPageState extends State<RegisterPage>
                         ),
 
                         //confirm password textfield
-                        MyTextFieldP(
+                        MyTextField(
                           controller: confirmPasswordController,
                           hintText: 'Confirm password',
                           obscureText: true,
@@ -247,8 +301,8 @@ class _RegisterPageState extends State<RegisterPage>
                             children: [
                               Expanded(
                                 child: Divider(
-                                  thickness: 0.7,
-                                  color: Color.fromARGB(255, 179, 9, 247),
+                                  thickness: 0.8,
+                                  color: Color.fromARGB(255, 242, 190, 2),
                                 ),
                               ),
                               const Padding(
@@ -256,13 +310,14 @@ class _RegisterPageState extends State<RegisterPage>
                                 child: Text(
                                   'Or continue with',
                                   style: TextStyle(
-                                      color: Color.fromARGB(255, 0, 0, 0)),
+                                      color:
+                                          Color.fromARGB(255, 255, 255, 255)),
                                 ),
                               ),
                               Expanded(
                                 child: Divider(
-                                  thickness: 0.7,
-                                  color: Color.fromARGB(255, 131, 10, 211),
+                                  thickness: 0.8,
+                                  color: Color.fromARGB(255, 242, 190, 2),
                                 ),
                               ),
                             ],
@@ -297,7 +352,7 @@ class _RegisterPageState extends State<RegisterPage>
                             const Text(
                               'Already have an account?',
                               style: TextStyle(
-                                  color: Color.fromARGB(255, 0, 0, 0)),
+                                  color: Color.fromARGB(255, 255, 255, 255)),
                             ),
                             const SizedBox(
                               width: 4,
@@ -307,7 +362,7 @@ class _RegisterPageState extends State<RegisterPage>
                               child: const Text(
                                 'Login now',
                                 style: TextStyle(
-                                    color: Color.fromARGB(255, 196, 77, 217),
+                                    color: Color.fromARGB(255, 242, 190, 2),
                                     fontWeight: FontWeight.bold),
                               ),
                             ),
