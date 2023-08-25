@@ -145,7 +145,12 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     Expanded(
                       child: ElevatedButton(
-                        onPressed: postMessage,
+                        onPressed: () {
+                          postMessage();
+                          titleController.clear();
+                          bodyController.clear();
+                          gameCategoryController.clear();
+                        },
                         child: Icon(Icons.arrow_circle_up),
                       ),
                     ),
