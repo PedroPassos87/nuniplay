@@ -2,11 +2,13 @@
 
 import 'dart:typed_data';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../database/get_user_nick.dart';
 import 'edit_page.dart';
 
 pickImage(ImageSource source) async {
@@ -41,6 +43,21 @@ class _ProfilePageState extends State<ProfilePage> {
     setState(() {
       _image = img;
     });
+  }
+
+  //document ids
+  List<String> docIDs = [];
+
+  //get doc Ids
+  Future getDocId() async {
+    await FirebaseFirestore.instance.collection("users").get().then(
+          (snapshot) => snapshot.docs.forEach(
+            (document) {
+              print(document.reference);
+              docIDs.add(document.reference.id);
+            },
+          ),
+        );
   }
 
   @override
@@ -118,13 +135,23 @@ class _ProfilePageState extends State<ProfilePage> {
                                           SizedBox(
                                             height: 85,
                                           ),
-                                          Text(
-                                            "User734",
-                                            style: TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 151, 6, 247),
-                                              fontSize: 22,
-                                              fontWeight: FontWeight.w700,
+                                          Expanded(
+                                            child: FutureBuilder(
+                                              future: getDocId(),
+                                              builder: (context, snapshot) {
+                                                return ListView.builder(
+                                                  itemCount: 1,
+                                                  itemBuilder:
+                                                      (context, index) {
+                                                    return ListTile(
+                                                      title: GetUserNick(
+                                                        documentId:
+                                                            docIDs[index],
+                                                      ),
+                                                    );
+                                                  },
+                                                );
+                                              },
                                             ),
                                           ),
                                           const SizedBox(

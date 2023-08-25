@@ -87,7 +87,7 @@ class _HomePageState extends State<HomePage> {
                   .collection("Posts")
                   .orderBy(
                     "TimeStamp",
-                    descending: false,
+                    descending: true,
                   )
                   .snapshots(),
               builder: (context, snapshot) {
@@ -156,25 +156,6 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               ],
-            ),
-          ),
-
-          // logged in as...
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: RichText(
-              text: TextSpan(
-                style: DefaultTextStyle.of(context).style,
-                children: <TextSpan>[
-                  TextSpan(
-                    text: "LOGADO COMO: ",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  TextSpan(
-                    text: currentUser.email,
-                  ),
-                ],
-              ),
             ),
           ),
         ],
