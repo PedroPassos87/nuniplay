@@ -1,13 +1,12 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sort_child_properties_last
 
 import 'dart:typed_data';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'home_page.dart';
 import 'package:image_picker/image_picker.dart';
-
 import '../database/get_user_nick.dart';
 import 'edit_page.dart';
 
@@ -37,6 +36,19 @@ class _ProfilePageState extends State<ProfilePage> {
   //se configurar o avatar ele ficara salvo
   Uint8List? _image;
 
+  void goToHomePage() {
+    // pop menu drawer
+    Navigator.pop(context);
+
+    // go to home page
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => HomePage(),
+      ),
+    );
+  }
+  
   void selectImage() async {
     Uint8List img = await pickImage(ImageSource.gallery);
 
@@ -297,6 +309,22 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ],
               ),
+            ),
+          ),
+          bottomNavigationBar: BottomAppBar(
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                IconButton(
+                  icon: Icon(Icons.menu),
+                  onPressed: goToHomePage,
+                ),
+                IconButton(
+                  icon: Icon(Icons.search),
+                  onPressed: () {},
+                ),
+              ],
             ),
           ),
         ),

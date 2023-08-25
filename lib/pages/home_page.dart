@@ -34,6 +34,19 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  void goToHomePage() {
+    // pop menu drawer
+    Navigator.pop(context);
+
+    // go to home page
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => HomePage(),
+      ),
+    );
+  }
+
   // text controllers for each part of the post
   final titleController = TextEditingController();
   final bodyController = TextEditingController();
