@@ -3,9 +3,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:uniplay/components/my_bottomBar.dart';
 import 'package:uniplay/components/my_textfield.dart';
 import 'package:uniplay/components/post_secenhanced.dart';
 import 'package:uniplay/pages/profile_page.dart';
+import 'edit_page.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({super.key});
@@ -20,37 +22,19 @@ class _HomePageState extends State<HomePage> {
   // user
   final currentUser = FirebaseAuth.instance.currentUser!;
 
-  // navigate to profile
-  void goToProfilePage() {
-    // pop menu drawer
-    Navigator.pop(context);
-
-    // go to profile page
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => ProfilePage(),
-      ),
-    );
-  }
-
-  void goToHomePage() {
-    // pop menu drawer
-    Navigator.pop(context);
-
-    // go to home page
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => HomePage(),
-      ),
-    );
-  }
+  // tracks if it should show the posting fields or not
+  bool showPostFields = false;
 
   // text controllers for each part of the post
   final titleController = TextEditingController();
   final bodyController = TextEditingController();
   final gameCategoryController = TextEditingController();
+
+  void togglePostFields() {
+    setState(() {
+      showPostFields = !showPostFields;
+    });
+  }
 
   //sign out
   void signUserOut() {
@@ -130,65 +114,57 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
 
-          // post something
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              children: [
-                MyTextField(
-                  controller: titleController,
-                  hintText: "Title",
-                  obscureText: false,
-                ),
-                SizedBox(height: 10), // Add some spacing between fields
-                MyTextField(
-                  controller: bodyController,
-                  hintText: "Post something",
-                  obscureText: false,
-                ),
-                SizedBox(height: 10), // Add some spacing between fields
-                MyTextField(
-                  controller: gameCategoryController,
-                  hintText: "Game Category",
-                  obscureText: false,
-                ),
-                SizedBox(height: 10), // Add some spacing between fields
-                Row(
-                  children: [
-                    Expanded(
-                      child: ElevatedButton(
-                        onPressed: () {
-                          postMessage();
-                          titleController.clear();
-                          bodyController.clear();
-                          gameCategoryController.clear();
-                        },
-                        child: Icon(Icons.arrow_circle_up),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+          // Toggle post fields button
+          ElevatedButton(
+            onPressed: togglePostFields,
+            child: Text('Postagem'),
           ),
+
+          // post something
+          if (showPostFields)
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                children: [
+                  MyTextField(
+                    controller: titleController,
+                    hintText: "Title",
+                    obscureText: false,
+                  ),
+                  SizedBox(height: 10), // Add some spacing between fields
+                  MyTextField(
+                    controller: bodyController,
+                    hintText: "Post something",
+                    obscureText: false,
+                  ),
+                  SizedBox(height: 10), // Add some spacing between fields
+                  MyTextField(
+                    controller: gameCategoryController,
+                    hintText: "Game Category",
+                    obscureText: false,
+                  ),
+                  SizedBox(height: 10), // Add some spacing between fields
+                  Row(
+                    children: [
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: () {
+                            postMessage();
+                            titleController.clear();
+                            bodyController.clear();
+                            gameCategoryController.clear();
+                          },
+                          child: Icon(Icons.arrow_circle_up),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
         ],
       ),
-      bottomNavigationBar: BottomAppBar(
-        child: Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            IconButton(
-              icon: Icon(Icons.menu),
-              onPressed: goToProfilePage,
-            ),
-            IconButton(
-              icon: Icon(Icons.search),
-              onPressed: () {},
-            ),
-          ],
-        ),
-      ),
+      bottomNavigationBar: MyNavigationBar(),
     );
   }
 }

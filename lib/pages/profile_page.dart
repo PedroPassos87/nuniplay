@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:uniplay/components/my_bottomBar.dart';
 import 'home_page.dart';
 import 'package:image_picker/image_picker.dart';
 import 'edit_page.dart';
@@ -310,22 +311,7 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ),
           ),
-          bottomNavigationBar: BottomAppBar(
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                IconButton(
-                  icon: Icon(Icons.menu),
-                  onPressed: goToHomePage,
-                ),
-                IconButton(
-                  icon: Icon(Icons.search),
-                  onPressed: () {},
-                ),
-              ],
-            ),
-          ),
+          bottomNavigationBar: MyNavigationBar(),
         ),
       ],
     );
