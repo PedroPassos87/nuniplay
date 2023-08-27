@@ -87,19 +87,24 @@ class _RegisterPageState extends State<RegisterPage>
     */
     //authenticate user
     if (passwordConfirmed()) {
-      //create user
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: emailController.text.trim(),
-        password: passwordController.text.trim(),
-      );
-      //add user details
-      addUserDetails(
-        nameController.text.trim(),
-        nickController.text.trim(),
-        collegeController.text.trim(),
-        int.parse(ageController.text.trim()),
-        emailController.text.trim(),
-      );
+      try {
+        //create user
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: emailController.text.trim(),
+          password: passwordController.text.trim(),
+        );
+        //add user details
+        addUserDetails(
+          nameController.text.trim(),
+          nickController.text.trim(),
+          collegeController.text.trim(),
+          int.parse(ageController.text.trim()),
+          emailController.text.trim(),
+        );
+      } catch (e) {
+        //pop the loading circle
+        showErrorMessage("Algo deu errado, verifique seus dados");
+      }
     }
   }
 
@@ -291,7 +296,7 @@ class _RegisterPageState extends State<RegisterPage>
                         const SizedBox(
                           height: 10,
                         ),
-
+/*
                         //continue with
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -339,11 +344,11 @@ class _RegisterPageState extends State<RegisterPage>
                             //future buttons
                           ],
                         ),
-
+*/
                         const SizedBox(
                           height: 25,
                         ),
-                        //not a member? register now
+                        //already a member? login now
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [

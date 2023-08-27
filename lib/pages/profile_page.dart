@@ -1,26 +1,69 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sort_child_properties_last
 
-import 'dart:typed_data';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
+
 import 'package:uniplay/components/my_bottomBar.dart';
+import 'package:uniplay/pages/username_page.dart';
 import 'home_page.dart';
 import 'edit_page.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+Future<UserModel> fetchUserDataFromFirestore(String userId) async {
+  try {
+    DocumentSnapshot userDoc =
+        await FirebaseFirestore.instance.collection('users').doc(userId).get();
+
+    // Parse the data from the document snapshot
+    Map<String, dynamic> userData = userDoc.data() as Map<String, dynamic>;
+    return UserModel(
+      id: userId,
+      name: userData['name'],
+      username: userData['username'],
+      college: userData['college'],
+      age: userData['age'],
+      email: userData['email'],
+      password: userData['password'],
+    );
+  } catch (e) {
+    print("Error fetching user data: $e");
+    throw e;
+  }
+}
 
 class ProfilePage extends StatefulWidget {
   ProfilePage({super.key});
-  final user = FirebaseAuth.instance.currentUser!;
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  // gets the current user
-  final currentUser = FirebaseAuth.instance.currentUser!;
   // edit field
   Future<void> editField(String field) async {}
+  late String _userName = ""; // Variable to store user's name
+
+  Future<void> fetchUserData() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      try {
+        UserModel userData = await fetchUserDataFromFirestore(user.uid);
+
+        setState(() {
+          _userName = userData.username;
+        });
+      } catch (e) {
+        print("Error fetching user data: $e");
+      }
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fetchUserData(); // Fetch user data when the widget is initialized
+  }
 
   void goToHomePage() {
     // pop menu drawer
@@ -112,11 +155,11 @@ class _ProfilePageState extends State<ProfilePage> {
                                             height: 80,
                                           ),
                                           Text(
-                                            'Pedro',
+                                            "Usuario 564",
                                             style: TextStyle(
-                                              color: Colors.grey[900],
-                                              fontSize: 21,
-                                            ),
+                                                color: Colors.grey[900],
+                                                fontSize: 21,
+                                                fontWeight: FontWeight.w500),
                                           ),
                                           SizedBox(
                                             height: 5,
@@ -211,7 +254,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   bottom: 90,
                                   right: 120,
                                   child: IconButton(
-                                    onPressed: () {},
+                                    onPressed: () async {},
                                     icon: Icon(
                                       Icons.photo_camera,
                                       color: const Color.fromARGB(255, 0, 0, 0),
