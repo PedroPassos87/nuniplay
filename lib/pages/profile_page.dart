@@ -4,20 +4,9 @@ import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:uniplay/components/my_bottomBar.dart';
 import 'home_page.dart';
-import 'package:image_picker/image_picker.dart';
 import 'edit_page.dart';
-
-pickImage(ImageSource source) async {
-  final ImagePicker _imagePicker = ImagePicker();
-  XFile? _file = await _imagePicker.pickImage(source: source);
-  if (_file != null) {
-    return await _file.readAsBytes();
-  }
-  print('No image selected.');
-}
 
 class ProfilePage extends StatefulWidget {
   ProfilePage({super.key});
@@ -33,9 +22,6 @@ class _ProfilePageState extends State<ProfilePage> {
   // edit field
   Future<void> editField(String field) async {}
 
-  //se configurar o avatar ele ficara salvo
-  Uint8List? _image;
-
   void goToHomePage() {
     // pop menu drawer
     Navigator.pop(context);
@@ -49,29 +35,6 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  void selectImage() async {
-    Uint8List img = await pickImage(ImageSource.gallery);
-
-    setState(() {
-      _image = img;
-    });
-  }
-
-  //document ids
-  List<String> docIDs = [];
-
-  //get doc Ids
-  Future getDocId() async {
-    await FirebaseFirestore.instance.collection("users").get().then(
-          (snapshot) => snapshot.docs.forEach(
-            (document) {
-              print(document.reference);
-              docIDs.add(document.reference.id);
-            },
-          ),
-        );
-  }
-
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -81,8 +44,8 @@ class _ProfilePageState extends State<ProfilePage> {
       children: [
         Scaffold(
           appBar: AppBar(
-            foregroundColor: const Color.fromARGB(255, 151, 6, 247),
-            backgroundColor: Color.fromARGB(255, 220, 184, 245),
+            foregroundColor: Color.fromARGB(255, 0, 102, 153),
+            backgroundColor: Color.fromARGB(255, 0, 102, 153),
             elevation: 0,
           ),
           body: Container(
@@ -91,13 +54,12 @@ class _ProfilePageState extends State<ProfilePage> {
             decoration: const BoxDecoration(
               gradient: LinearGradient(
                   colors: [
-                    Color.fromARGB(255, 220, 184, 245),
-                    Color.fromARGB(255, 193, 113, 247),
-                    Color.fromARGB(255, 151, 6, 247),
+                    Color.fromARGB(255, 0, 102, 153),
+                    Color.fromARGB(255, 3, 173, 240),
                   ],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
-                  stops: [0.2, 0.6, 1.0],
+                  stops: [0.3, 1.0],
                   tileMode: TileMode.clamp),
             ),
             child: Center(
@@ -118,7 +80,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       ),
                       SizedBox(
-                        height: height * 0.4,
+                        height: height * 0.35,
                         child: LayoutBuilder(
                           builder: (context, constraints) {
                             double innerHeight = constraints.maxHeight;
@@ -133,9 +95,11 @@ class _ProfilePageState extends State<ProfilePage> {
                                   right: 0,
                                   child: Padding(
                                     padding: const EdgeInsets.only(
-                                        left: 20, right: 20),
+                                      left: 20,
+                                      right: 20,
+                                    ),
                                     child: Container(
-                                      height: innerHeight * 0.6,
+                                      height: innerHeight * 0.57,
                                       width: innerWidth,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(32),
@@ -145,29 +109,17 @@ class _ProfilePageState extends State<ProfilePage> {
                                       child: Column(
                                         children: [
                                           SizedBox(
-                                            height: 85,
+                                            height: 80,
                                           ),
-                                          /*Expanded(
-                                            child: FutureBuilder(
-                                              future: getDocId(),
-                                              builder: (context, snapshot) {
-                                                return ListView.builder(
-                                                  itemCount: 1,
-                                                  itemBuilder:
-                                                      (context, index) {
-                                                    return ListTile(
-                                                      title: GetUserNick(
-                                                        documentId:
-                                                            docIDs[index],
-                                                      ),
-                                                    );
-                                                  },
-                                                );
-                                              },
+                                          Text(
+                                            'Pedro',
+                                            style: TextStyle(
+                                              color: Colors.grey[900],
+                                              fontSize: 21,
                                             ),
-                                          ),*/
-                                          const SizedBox(
-                                            height: 12,
+                                          ),
+                                          SizedBox(
+                                            height: 5,
                                           ),
                                           Row(
                                             mainAxisAlignment:
@@ -240,30 +192,32 @@ class _ProfilePageState extends State<ProfilePage> {
                                   ),
                                 ),
                                 Positioned(
-                                  top: 70,
-                                  right: 0,
-                                  left: 0,
+                                  top: innerHeight * 0.5 -
+                                      90, // Adjust this value to center the CircleAvatar
+                                  left: innerWidth * 0.5 - 70,
                                   child: Center(
                                     child: Container(
-                                      child: _image != null
-                                          ? CircleAvatar(
-                                              radius: 70,
-                                              backgroundImage:
-                                                  MemoryImage(_image!),
-                                              backgroundColor:
-                                                  const Color.fromARGB(
-                                                      255, 255, 254, 254),
-                                            )
-                                          : CircleAvatar(
-                                              radius: 70,
-                                              backgroundImage: ExactAssetImage(
-                                                  'assets/images/iconhs.png'),
-                                              backgroundColor:
-                                                  Color.fromARGB(255, 3, 3, 3),
-                                            ),
+                                      child: CircleAvatar(
+                                        radius: 70,
+                                        backgroundImage: ExactAssetImage(
+                                            'assets/images/iconhs.png'),
+                                        backgroundColor:
+                                            Color.fromARGB(255, 3, 3, 3),
+                                      ),
                                     ),
                                   ),
                                 ),
+                                Positioned(
+                                  bottom: 90,
+                                  right: 120,
+                                  child: IconButton(
+                                    onPressed: () {},
+                                    icon: Icon(
+                                      Icons.photo_camera,
+                                      color: const Color.fromARGB(255, 0, 0, 0),
+                                    ),
+                                  ),
+                                )
                               ],
                             );
                           },

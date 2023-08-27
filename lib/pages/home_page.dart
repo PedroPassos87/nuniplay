@@ -61,12 +61,12 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(136, 218, 218, 218),
+      backgroundColor: Color.fromARGB(255, 255, 255, 255),
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         foregroundColor: Colors.lightBlueAccent,
         title: const Text('Main Page'),
-        elevation: 0,
+        elevation: 5,
         actions: [
           IconButton(
             onPressed: signUserOut,
