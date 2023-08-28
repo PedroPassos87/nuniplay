@@ -1,4 +1,4 @@
-// trying to make the sec post class, which works, better
+// CURRENTLY USED POST !!!!!
 
 import 'package:flutter/material.dart';
 
@@ -20,7 +20,7 @@ class EnhancedPost extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Color.fromARGB(255, 206, 200, 200),
+        color: Color.fromARGB(255, 245, 242, 242),
         borderRadius: BorderRadius.circular(7),
       ),
       margin: EdgeInsets.symmetric(horizontal: 25, vertical: 15),
@@ -33,7 +33,7 @@ class EnhancedPost extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: Colors.grey[400],
+              color: const Color.fromARGB(255, 189, 189, 189),
             ),
             padding: EdgeInsets.all(15),
             child: Icon(

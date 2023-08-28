@@ -1,4 +1,5 @@
 // trying to make a post class for the first time. 3 distinct fields etc
+// !!!!!!!!!!! USELESS !!!!!!!!!!!!
 
 import 'package:flutter/material.dart';
 
