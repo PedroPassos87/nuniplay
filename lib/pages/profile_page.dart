@@ -1,36 +1,15 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sort_child_properties_last
 
-import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-
+import 'package:image_picker/image_picker.dart';
+import 'package:uniplay/components/image_picker.dart';
 import 'package:uniplay/components/my_bottomBar.dart';
-import 'package:uniplay/pages/username_page.dart';
+import 'package:uniplay/resources/add_data.dart';
+
 import 'home_page.dart';
 import 'edit_page.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-
-Future<UserModel> fetchUserDataFromFirestore(String userId) async {
-  try {
-    DocumentSnapshot userDoc =
-        await FirebaseFirestore.instance.collection('users').doc(userId).get();
-
-    // Parse the data from the document snapshot
-    Map<String, dynamic> userData = userDoc.data() as Map<String, dynamic>;
-    return UserModel(
-      id: userId,
-      name: userData['name'],
-      username: userData['username'],
-      college: userData['college'],
-      age: userData['age'],
-      email: userData['email'],
-      password: userData['password'],
-    );
-  } catch (e) {
-    print("Error fetching user data: $e");
-    throw e;
-  }
-}
 
 class ProfilePage extends StatefulWidget {
   ProfilePage({super.key});
@@ -40,31 +19,6 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  // edit field
-  Future<void> editField(String field) async {}
-  late String _userName = ""; // Variable to store user's name
-
-  Future<void> fetchUserData() async {
-    User? user = FirebaseAuth.instance.currentUser;
-    if (user != null) {
-      try {
-        UserModel userData = await fetchUserDataFromFirestore(user.uid);
-
-        setState(() {
-          _userName = userData.username;
-        });
-      } catch (e) {
-        print("Error fetching user data: $e");
-      }
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    fetchUserData(); // Fetch user data when the widget is initialized
-  }
-
   void goToHomePage() {
     // pop menu drawer
     Navigator.pop(context);
@@ -240,13 +194,19 @@ class _ProfilePageState extends State<ProfilePage> {
                                   left: innerWidth * 0.5 - 70,
                                   child: Center(
                                     child: Container(
-                                      child: CircleAvatar(
-                                        radius: 70,
-                                        backgroundImage: ExactAssetImage(
-                                            'assets/images/iconhs.png'),
-                                        backgroundColor:
-                                            Color.fromARGB(255, 3, 3, 3),
-                                      ),
+                                      child: _image != null
+                                          ? CircleAvatar(
+                                              radius: 70,
+                                              backgroundImage:
+                                                  MemoryImage(_image!),
+                                            )
+                                          : CircleAvatar(
+                                              radius: 70,
+                                              backgroundImage: ExactAssetImage(
+                                                  'assets/images/iconhs.png'),
+                                              backgroundColor:
+                                                  Color.fromARGB(255, 3, 3, 3),
+                                            ),
                                     ),
                                   ),
                                 ),
@@ -254,7 +214,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   bottom: 90,
                                   right: 120,
                                   child: IconButton(
-                                    onPressed: () async {},
+                                    onPressed: selectImage,
                                     icon: Icon(
                                       Icons.photo_camera,
                                       color: const Color.fromARGB(255, 0, 0, 0),
@@ -312,5 +272,14 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
       ],
     );
+  }
+
+  Uint8List? _image;
+  void selectImage() async {
+    Uint8List img = await pickImage(ImageSource.gallery);
+
+    setState(() {
+      _image = img;
+    });
   }
 }
