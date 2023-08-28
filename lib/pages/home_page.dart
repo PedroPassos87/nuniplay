@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Colors.lightBlueAccent,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Color.fromARGB(255, 3, 173, 240),
         elevation: 0,
         actions: [
           IconButton(
@@ -77,93 +77,106 @@ class _HomePageState extends State<HomePage> {
       ),
 
       // sending posts to db
-      body: Column(
-        children: [
-          Expanded(
-            child: StreamBuilder(
-              stream: FirebaseFirestore.instance
-                  .collection("Posts")
-                  .orderBy(
-                    "TimeStamp",
-                    descending: true,
-                  )
-                  .snapshots(),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return ListView.builder(
-                    itemCount: snapshot.data!.docs.length,
-                    itemBuilder: (context, index) {
-                      // get the actual post
-                      final post = snapshot.data!.docs[index];
-                      return EnhancedPost(
-                        title: post['Title'],
-                        gameCategory: post['GameCat'],
-                        body: post['Body'],
-                        user: post['UserEmail'],
-                      );
-                    },
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+              colors: [
+                Color.fromARGB(255, 3, 173, 240),
+                Color.fromARGB(255, 0, 102, 153),
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              stops: [0.4, 1.0],
+              tileMode: TileMode.clamp),
+        ),
+        child: Column(
+          children: [
+            Expanded(
+              child: StreamBuilder(
+                stream: FirebaseFirestore.instance
+                    .collection("Posts")
+                    .orderBy(
+                      "TimeStamp",
+                      descending: true,
+                    )
+                    .snapshots(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return ListView.builder(
+                      itemCount: snapshot.data!.docs.length,
+                      itemBuilder: (context, index) {
+                        // get the actual post
+                        final post = snapshot.data!.docs[index];
+                        return EnhancedPost(
+                          title: post['Title'],
+                          gameCategory: post['GameCat'],
+                          body: post['Body'],
+                          user: post['UserEmail'],
+                        );
+                      },
+                    );
+                  } else if (snapshot.hasError) {
+                    return Center(
+                      child: Text('Erro: ${snapshot.error.toString()}'),
+                    );
+                  }
+                  return const Center(
+                    child: CircularProgressIndicator(),
                   );
-                } else if (snapshot.hasError) {
-                  return Center(
-                    child: Text('Erro: ${snapshot.error.toString()}'),
-                  );
-                }
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              },
-            ),
-          ),
-
-          // Toggle post fields button
-          ElevatedButton(
-            onPressed: togglePostFields,
-            child: Text('Nova Postagem'),
-          ),
-
-          // post something
-          if (showPostFields)
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                children: [
-                  MyTextField(
-                    controller: titleController,
-                    hintText: "Título",
-                    obscureText: false,
-                  ),
-                  SizedBox(height: 10), // Add some spacing between fields
-                  MyTextField(
-                    controller: bodyController,
-                    hintText: "Poste algo",
-                    obscureText: false,
-                  ),
-                  SizedBox(height: 10), // Add some spacing between fields
-                  MyTextField(
-                    controller: gameCategoryController,
-                    hintText: "Categoria do Jogo",
-                    obscureText: false,
-                  ),
-                  SizedBox(height: 10), // Add some spacing between fields
-                  Row(
-                    children: [
-                      Expanded(
-                        child: ElevatedButton(
-                          onPressed: () {
-                            postMessage();
-                            titleController.clear();
-                            bodyController.clear();
-                            gameCategoryController.clear();
-                          },
-                          child: Icon(Icons.arrow_circle_up),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
+                },
               ),
             ),
-        ],
+      
+            // Toggle post fields button
+            ElevatedButton(
+              onPressed: togglePostFields,
+              child: Text('Nova Postagem'),
+            ),
+      
+            // post something
+            if (showPostFields)
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  children: [
+                    MyTextField(
+                      controller: titleController,
+                      hintText: "Título",
+                      obscureText: false,
+                    ),
+                    SizedBox(height: 10), // Add some spacing between fields
+                    MyTextField(
+                      controller: bodyController,
+                      hintText: "Poste algo",
+                      obscureText: false,
+                    ),
+                    SizedBox(height: 10), // Add some spacing between fields
+                    MyTextField(
+                      controller: gameCategoryController,
+                      hintText: "Categoria do Jogo",
+                      obscureText: false,
+                    ),
+                    SizedBox(height: 10), // Add some spacing between fields
+                    Row(
+                      children: [
+                        Expanded(
+                          child: ElevatedButton(
+                            onPressed: () {
+                              postMessage();
+                              titleController.clear();
+                              bodyController.clear();
+                              gameCategoryController.clear();
+                            },
+                            child: Icon(Icons.arrow_circle_up),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+          ],
+        ),
       ),
       bottomNavigationBar: MyNavigationBar(),
     );
