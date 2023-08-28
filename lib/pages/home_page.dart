@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +6,7 @@ import 'package:uniplay/components/my_textfield.dart';
 import 'package:uniplay/components/post_secenhanced.dart';
 import 'package:uniplay/pages/profile_page.dart';
 import 'edit_page.dart';
+import 'auth_page.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({super.key});
@@ -36,18 +35,22 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  //sign out
-  void signUserOut() {
-    FirebaseAuth.instance.signOut();
+//sign out
+  void signUserOut() async {
+    await FirebaseAuth.instance.signOut();
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => AuthPage()),
+    );
   }
 
   // method that does the posting itself
   void postMessage() {
-    // posts only if theres something on all fields
+    // posts only if there's something in all fields
     if (bodyController.text.isNotEmpty &&
         titleController.text.isNotEmpty &&
         gameCategoryController.text.isNotEmpty) {
-      // stores in firebase
+      // stores in Firebase
       FirebaseFirestore.instance.collection("Posts").add({
         "Title": titleController.text,
         "GameCat": gameCategoryController.text,
@@ -61,28 +64,9 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 255, 255, 255),
+      backgroundColor: Colors.lightBlueAccent,
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-        foregroundColor: Colors.lightBlueAccent,
-        title: Row(
-          children: [
-            Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Color.fromARGB(255, 153, 204, 255),
-              ),
-              child: Icon(
-                Icons.person,
-                color: Colors.white,
-              ),
-            ),
-            SizedBox(width: 10), // Espaçamento entre o ícone e o texto
-            Text('Main Page'),
-          ],
-        ),
+        backgroundColor: Colors.transparent,
         elevation: 0,
         actions: [
           IconButton(
@@ -121,7 +105,7 @@ class _HomePageState extends State<HomePage> {
                   );
                 } else if (snapshot.hasError) {
                   return Center(
-                    child: Text('Erro: $snapshot.error.toString()'),
+                    child: Text('Erro: ${snapshot.error.toString()}'),
                   );
                 }
                 return const Center(
@@ -134,7 +118,7 @@ class _HomePageState extends State<HomePage> {
           // Toggle post fields button
           ElevatedButton(
             onPressed: togglePostFields,
-            child: Text('Postagem'),
+            child: Text('Nova Postagem'),
           ),
 
           // post something
@@ -145,19 +129,19 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   MyTextField(
                     controller: titleController,
-                    hintText: "Title",
+                    hintText: "Título",
                     obscureText: false,
                   ),
                   SizedBox(height: 10), // Add some spacing between fields
                   MyTextField(
                     controller: bodyController,
-                    hintText: "Post something",
+                    hintText: "Poste algo",
                     obscureText: false,
                   ),
                   SizedBox(height: 10), // Add some spacing between fields
                   MyTextField(
                     controller: gameCategoryController,
-                    hintText: "Game Category",
+                    hintText: "Categoria do Jogo",
                     obscureText: false,
                   ),
                   SizedBox(height: 10), // Add some spacing between fields
