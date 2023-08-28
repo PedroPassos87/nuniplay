@@ -46,7 +46,7 @@ class MyNavigationBar extends StatelessWidget {
     }
 
     return BottomAppBar(
-      color: Color.fromARGB(255, 3, 173, 240),
+      color: Color.fromARGB(255, 255, 255, 255),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,

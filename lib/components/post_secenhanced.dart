@@ -1,5 +1,7 @@
 // CURRENTLY USED POST !!!!!
 
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 
 class EnhancedPost extends StatelessWidget {
@@ -21,24 +23,25 @@ class EnhancedPost extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: Color.fromARGB(255, 245, 242, 242),
-        borderRadius: BorderRadius.circular(7),
+        borderRadius: BorderRadius.circular(50),
       ),
       margin: EdgeInsets.symmetric(horizontal: 25, vertical: 15),
-      padding: EdgeInsets.all(20),
+      padding: EdgeInsets.all(12),
       child: Row(
         crossAxisAlignment:
-            CrossAxisAlignment.start, // Alinhar o topo dos elementos
+            CrossAxisAlignment.center, // Alinhar o topo dos elementos
         children: [
           // profile pic / icon
           Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: const Color.fromARGB(255, 189, 189, 189),
+              color: Color.fromARGB(255, 224, 223, 223),
             ),
             padding: EdgeInsets.all(15),
             child: Icon(
               Icons.person,
               color: Color.fromARGB(255, 242, 2, 174),
+              size: 40,
             ),
           ),
           SizedBox(
@@ -48,13 +51,31 @@ class EnhancedPost extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                gameCategory,
-                style: TextStyle(
-                  color: Colors.blueAccent,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                ),
+              Row(
+                children: [
+                  Text(
+                    gameCategory,
+                    style: TextStyle(
+                      color: Colors.blueAccent,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 8,
+                    ),
+                  ),
+                  Text(
+                    title,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
               ),
               SizedBox(height: 5),
               Text(
@@ -62,15 +83,6 @@ class EnhancedPost extends StatelessWidget {
                 style: TextStyle(
                   color: Colors.lightBlue,
                   fontSize: 14,
-                ),
-              ),
-              SizedBox(height: 10),
-              Text(
-                title,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
                 ),
               ),
               SizedBox(height: 10),

@@ -154,66 +154,30 @@ class _ProfilePageState extends State<ProfilePage> {
                                           ),
                                           Row(
                                             mainAxisAlignment:
-                                                MainAxisAlignment.center,
+                                                MainAxisAlignment.spaceEvenly,
                                             children: [
                                               Column(
                                                 children: [
-                                                  Text(
-                                                    'Posts',
-                                                    style: TextStyle(
-                                                      color: Colors.grey[900],
-                                                      fontSize: 21,
-                                                    ),
+                                                  Image.asset(
+                                                    "assets/images/vava.png",
+                                                    scale: 4,
                                                   ),
-                                                  Text(
-                                                    '10',
-                                                    style: TextStyle(
-                                                      color: Color.fromARGB(
-                                                          255, 242, 2, 54),
-                                                      fontSize: 21,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                    ),
-                                                  )
                                                 ],
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                  horizontal: 20,
-                                                  vertical: 8,
-                                                ),
-                                                child: Container(
-                                                  height: 45,
-                                                  width: 2,
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            100),
-                                                    color: Color.fromARGB(
-                                                        255, 242, 190, 2),
-                                                  ),
-                                                ),
                                               ),
                                               Column(
                                                 children: [
-                                                  Text(
-                                                    'Nota',
-                                                    style: TextStyle(
-                                                      color: Colors.grey[900],
-                                                      fontSize: 21,
-                                                    ),
+                                                  Image.asset(
+                                                    "assets/images/clash.png",
+                                                    scale: 4,
                                                   ),
-                                                  Text(
-                                                    '9.6',
-                                                    style: TextStyle(
-                                                      color: Color.fromARGB(
-                                                          255, 242, 2, 54),
-                                                      fontSize: 21,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                    ),
-                                                  )
+                                                ],
+                                              ),
+                                              Column(
+                                                children: [
+                                                  Image.asset(
+                                                    "assets/images/lol.png",
+                                                    scale: 4,
+                                                  ),
                                                 ],
                                               ),
                                             ],
@@ -237,8 +201,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                             )
                                           : CircleAvatar(
                                               radius: 70,
-                                              backgroundImage: ExactAssetImage(
-                                                  'assets/images/iconhs.png'),
+                                              backgroundImage: AssetImage(
+                                                  "assets/images/esports.jpg"),
                                               backgroundColor:
                                                   Color.fromARGB(255, 3, 3, 3),
                                             ),

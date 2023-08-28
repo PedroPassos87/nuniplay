@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -64,7 +66,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightBlueAccent,
+      backgroundColor: const Color.fromARGB(255, 21, 23, 24),
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 3, 173, 240),
         elevation: 0,
@@ -91,6 +93,20 @@ class _HomePageState extends State<HomePage> {
         ),
         child: Column(
           children: [
+            Align(
+              alignment: Alignment.center,
+              child: Text(
+                'LOBBY',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 45,
+                  fontFamily: 'arcadeclassic',
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 24,
+            ),
             Expanded(
               child: StreamBuilder(
                 stream: FirebaseFirestore.instance
@@ -126,13 +142,13 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
             ),
-      
+
             // Toggle post fields button
             ElevatedButton(
               onPressed: togglePostFields,
               child: Text('Nova Postagem'),
             ),
-      
+
             // post something
             if (showPostFields)
               Padding(
