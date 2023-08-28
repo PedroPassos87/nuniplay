@@ -1,66 +1,25 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:uniplay/components/my_bottomBar.dart';
 
-import '../database/get_user_nick.dart';
+import '../components/my_bottomBar.dart';
 
-class editPage extends StatefulWidget {
-  const editPage({super.key});
+class EditProfile extends StatefulWidget {
+  const EditProfile({super.key});
 
   @override
-  State<editPage> createState() => _editPageState();
+  State<EditProfile> createState() => _EditProfileState();
 }
 
-class _editPageState extends State<editPage> {
-//document ids
-  List<String> docIDs = [];
-
-  User? currentUser = FirebaseAuth.instance.currentUser!;
-
-  //get doc Ids
-  Future getDocId() async {
-    await FirebaseFirestore.instance
-        .collection('users')
-        .where('email', isEqualTo: currentUser?.email)
-        .get()
-        .then(
-      (snapshot) {
-        snapshot.docs.forEach((document) {
-          print(document.reference);
-          docIDs.add(document.reference.id);
-        });
-      },
-    );
-  }
-
+class _EditProfileState extends State<EditProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Center(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Expanded(
-            child: FutureBuilder(
-              future: getDocId(),
-              builder: (context, snapshot) {
-                return ListView.builder(
-                  itemCount: docIDs.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      title: GetUserNick(documentId: docIDs[index]),
-                    );
-                  },
-                );
-              },
-            ),
-          )
-        ],
-      )),
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        elevation: 1,
+      ),
+      body: Container(
+        child: ListView(),
+      ),
       bottomNavigationBar: MyNavigationBar(),
     );
   }
