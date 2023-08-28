@@ -169,7 +169,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                                     '10',
                                                     style: TextStyle(
                                                       color: Color.fromARGB(
-                                                          255, 151, 6, 247),
+                                                          255, 242, 2, 54),
                                                       fontSize: 21,
                                                       fontWeight:
                                                           FontWeight.w500,
@@ -190,7 +190,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             100),
-                                                    color: Colors.grey,
+                                                    color: Color.fromARGB(
+                                                        255, 242, 190, 2),
                                                   ),
                                                 ),
                                               ),
@@ -207,7 +208,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                                     '9.6',
                                                     style: TextStyle(
                                                       color: Color.fromARGB(
-                                                          255, 151, 6, 247),
+                                                          255, 242, 2, 54),
                                                       fontSize: 21,
                                                       fontWeight:
                                                           FontWeight.w500,
@@ -244,17 +245,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                     ),
                                   ),
                                 ),
-                                Positioned(
-                                  bottom: 90,
-                                  right: 120,
-                                  child: IconButton(
-                                    onPressed: selectImage,
-                                    icon: Icon(
-                                      Icons.photo_camera,
-                                      color: const Color.fromARGB(255, 0, 0, 0),
-                                    ),
-                                  ),
-                                )
                               ],
                             );
                           },
@@ -274,7 +264,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (_) => editPage(),
+                              builder: (_) => EditProfile(),
                             ),
                           );
                         },
@@ -290,7 +280,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.w500,
-                                color: Color.fromARGB(255, 151, 6, 247),
+                                color: Color.fromARGB(255, 30, 9, 124),
                               ),
                             ),
                           ),

@@ -6,7 +6,6 @@ import '../pages/profile_page.dart';
 class MyNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    
     void goToHomePage() {
       // pop menu drawer
       Navigator.pop(context);
@@ -41,7 +40,7 @@ class MyNavigationBar extends StatelessWidget {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => editPage(),
+          builder: (context) => EditProfile(),
         ),
       );
     }
