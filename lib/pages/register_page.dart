@@ -1,12 +1,18 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_build_context_synchronously, avoid_single_cascade_in_expression_statements
+import 'dart:typed_data';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:uniplay/components/image_picker.dart';
 import 'package:uniplay/components/my_buttonP.dart';
 import 'package:uniplay/components/my_textfield.dart';
 import 'package:uniplay/components/square_tile.dart';
 import 'package:uniplay/services/auth_service.dart';
 import 'package:uuid/uuid.dart';
+
+import '../resources/add_data.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key, required this.onTap}) : super(key: key);
@@ -397,4 +403,18 @@ class _RegisterPageState extends State<RegisterPage>
       },
     );
   }
+
+  /* void saveProfile() async {
+    String resp = await StoreData()
+        .saveData(username: nameController.text, file: _image!);
+  }
+
+  Uint8List? _image;
+  void selectImage() async {
+    Uint8List img = await pickImage(ImageSource.gallery);
+
+    setState(() {
+      _image = img;
+    });
+  }*/
 }
