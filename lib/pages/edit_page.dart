@@ -3,6 +3,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:uniplay/components/my_bottomBar.dart';
+
+import '../database/get_user_nick.dart';
 
 class editPage extends StatefulWidget {
   const editPage({super.key});
@@ -37,7 +40,28 @@ class _editPageState extends State<editPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Center(),
+      body: Center(
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Expanded(
+            child: FutureBuilder(
+              future: getDocId(),
+              builder: (context, snapshot) {
+                return ListView.builder(
+                  itemCount: docIDs.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      title: GetUserNick(documentId: docIDs[index]),
+                    );
+                  },
+                );
+              },
+            ),
+          )
+        ],
+      )),
+      bottomNavigationBar: MyNavigationBar(),
     );
   }
 }
