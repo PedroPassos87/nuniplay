@@ -310,10 +310,15 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Uint8List? _image;
   void selectImage() async {
-    Uint8List img = await pickImage(ImageSource.gallery);
+    Uint8List? img = await pickImage(ImageSource.gallery);
 
-    setState(() {
-      _image = img;
-    });
+    if (img != null) {
+      setState(() {
+        _image = img;
+      });
+    } else {
+      // Usuário cancelou a seleção da imagem
+      print('User canceled image selection');
+    }
   }
 }
