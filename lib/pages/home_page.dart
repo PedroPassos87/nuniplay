@@ -20,7 +20,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   // user
-  final currentUser = FirebaseAuth.instance.currentUser!;
+  User? currentUser = FirebaseAuth.instance.currentUser!;
 
   // tracks if it should show the posting fields or not
   bool showPostFields = false;
@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> {
         "Title": titleController.text,
         "GameCat": gameCategoryController.text,
         "Body": bodyController.text,
-        "UserEmail": currentUser.email,
+        "UserEmail": currentUser!.email,
         "TimeStamp": Timestamp.now(),
       });
     }
@@ -65,7 +65,24 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         foregroundColor: Colors.lightBlueAccent,
-        title: const Text('Main Page'),
+        title: Row(
+          children: [
+            Container(
+              width: 40,
+              height: 40,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Color.fromARGB(255, 153, 204, 255),
+              ),
+              child: Icon(
+                Icons.person,
+                color: Colors.white,
+              ),
+            ),
+            SizedBox(width: 10), // Espaçamento entre o ícone e o texto
+            Text('Main Page'),
+          ],
+        ),
         elevation: 0,
         actions: [
           IconButton(
