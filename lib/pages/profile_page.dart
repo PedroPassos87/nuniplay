@@ -2,12 +2,15 @@
 
 import 'dart:typed_data';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uniplay/components/image_picker.dart';
 import 'package:uniplay/components/my_bottomBar.dart';
 import 'package:uniplay/resources/add_data.dart';
 
+import '../database/get_user_nick.dart';
 import 'home_page.dart';
 import 'edit_page.dart';
 
@@ -19,6 +22,26 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  List<String> docIDs = [];
+
+  User? currentUser = FirebaseAuth.instance.currentUser!;
+
+  //get doc Ids
+  Future getDocId() async {
+    await FirebaseFirestore.instance
+        .collection('users')
+        .where('email', isEqualTo: currentUser?.email)
+        .get()
+        .then(
+      (snapshot) {
+        snapshot.docs.forEach((document) {
+          print(document.reference);
+          docIDs.add(document.reference.id);
+        });
+      },
+    );
+  }
+
   void goToHomePage() {
     // pop menu drawer
     Navigator.pop(context);
@@ -106,14 +129,25 @@ class _ProfilePageState extends State<ProfilePage> {
                                       child: Column(
                                         children: [
                                           SizedBox(
-                                            height: 80,
+                                            height: 70,
                                           ),
-                                          Text(
-                                            "Usuario 564",
-                                            style: TextStyle(
-                                                color: Colors.grey[900],
-                                                fontSize: 21,
-                                                fontWeight: FontWeight.w500),
+                                          Expanded(
+                                            child: FutureBuilder(
+                                              future: getDocId(),
+                                              builder: (context, snapshot) {
+                                                return ListView.builder(
+                                                  itemCount: docIDs.length,
+                                                  itemBuilder:
+                                                      (context, index) {
+                                                    return ListTile(
+                                                      title: GetUserNick(
+                                                          documentId:
+                                                              docIDs[index]),
+                                                    );
+                                                  },
+                                                );
+                                              },
+                                            ),
                                           ),
                                           SizedBox(
                                             height: 5,
