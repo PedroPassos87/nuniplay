@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sort_child_properties_last
 
+import 'dart:ffi';
 import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -219,8 +220,28 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                     ],
                   ),
-
-                  //EDITAR
+                  Container(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Sobre Mim:',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        TextField(
+                          maxLines: 4, // Ajuste o número de linhas desejado
+                          decoration: InputDecoration(
+                            hintText: 'Digite algo sobre você...',
+                            border: OutlineInputBorder(),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                   Positioned(
                     bottom: 100,
                     left: 0,
