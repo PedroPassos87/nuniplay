@@ -10,6 +10,8 @@ List<String> profileImageURLs = [
   'https://i.pinimg.com/564x/9a/1a/ac/9a1aac45106ec0f0ae5ba9f586fcca6b.jpg',
   'https://i.pinimg.com/564x/80/f3/dc/80f3dc1bcb7d55f4a5ede676672f3df0.jpg',
   'https://i.pinimg.com/736x/e7/71/f6/e771f6581c14e35ed4e17fc81bf9312e.jpg',
+  'https://i.pinimg.com/564x/9c/97/4f/9c974f1094980bca44b8361d4813a0c5.jpg',
+  'https://i.pinimg.com/564x/5d/f4/18/5df418287735c4bc97bc8e4100d0a451.jpg',
 ];
 
 String selectedProfileImageURL =
