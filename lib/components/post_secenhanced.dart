@@ -67,7 +67,6 @@ class EnhancedPost extends StatelessWidget {
                       vertical: 8,
                     ),
                   ),
-
                   FittedBox(
                     fit: BoxFit.scaleDown,
                     child: Text(
