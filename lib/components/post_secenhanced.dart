@@ -39,7 +39,8 @@ class EnhancedPost extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _image = selectedProfileImageURL;
+    selectRandomProfileImage();
+    final image = selectedProfileImageURL;
     return Container(
       decoration: BoxDecoration(
         color: Color.fromARGB(255, 245, 242, 242),
@@ -60,7 +61,7 @@ class EnhancedPost extends StatelessWidget {
             padding: EdgeInsets.all(12),
             child: CircleAvatar(
               backgroundColor: const Color.fromARGB(0, 194, 12, 12),
-              backgroundImage: NetworkImage(_image),
+              backgroundImage: NetworkImage(image),
               radius: 20, // Define um raio inicial (pode ser ajustado)
             ),
           ),
