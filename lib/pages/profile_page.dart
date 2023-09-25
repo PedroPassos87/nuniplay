@@ -216,13 +216,15 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                     ],
                   ),
-                  //aqui
+
+                  //EDITAR
                   Positioned(
                     bottom: 100,
                     left: 0,
                     right: 0,
                     child: Padding(
-                      padding: const EdgeInsets.all(40.0),
+                      padding:
+                          const EdgeInsets.only(left: 40, right: 40, top: 15),
                       child: GestureDetector(
                         onTap: () {
                           Navigator.pushReplacement(
