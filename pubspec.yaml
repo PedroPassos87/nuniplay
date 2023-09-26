@@ -1,5 +1,5 @@
 name: uniplay
-description: A new Flutter project.
+description: Um projeto flutter, criado para a FETIN 2023. Uma rede social que facilite a integração de universitarios a partir dos games
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -45,6 +45,23 @@ dependencies:
   uuid: ^3.0.5
   get: ^4.6.5
   firebase_storage: ^11.2.6
+  flutter_launcher_icons: ^0.9.2
+  flutter_native_splash: ^1.2.0
+
+flutter_native_splash:
+  color: "#1486E3"
+  image: "assets/images/logounipng.png"
+  android: true
+  ios: true
+
+flutter_icons:
+  image_path: "assets/images/logouniand.png"
+  ios: true
+  remove_alpha_ios: true
+  android: "launcher_icon"
+  adaptive_icon_background: "#1486E3"
+  adaptive_icon_foreground: "assets/images/logounipng.png"
+
 
 dev_dependencies:
   flutter_test:
@@ -56,6 +73,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+  
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
