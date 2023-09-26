@@ -228,14 +228,15 @@ class _ProfilePageState extends State<ProfilePage> {
                         Text(
                           'Sobre Mim:',
                           style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
                         ),
                         TextField(
                           maxLines: 4, // Ajuste o número de linhas desejado
                           decoration: InputDecoration(
-                            hintText: 'Digite algo sobre você...',
+                            hintText:
+                                'Equipe Universitaria de E-sports do Inatel',
                             border: OutlineInputBorder(),
                           ),
                         ),

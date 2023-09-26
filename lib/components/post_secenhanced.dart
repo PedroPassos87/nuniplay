@@ -81,55 +81,57 @@ class EnhancedPost extends StatelessWidget {
             width: 20,
           ),
           // post and who posted
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Text(
-                    gameCategory,
-                    style: TextStyle(
-                      color: Colors.blueAccent,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 10,
-                      vertical: 8,
-                    ),
-                  ),
-                  FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: Text(
-                      title,
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                FittedBox(
+                  fit: BoxFit.fill,
+                  child: Row(
+                    children: [
+                      Text(
+                        gameCategory,
+                        style: TextStyle(
+                          color: Colors.blueAccent,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
                       ),
-                    ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 8,
+                        ),
+                      ),
+                      Text(
+                        title,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-              SizedBox(height: 5),
-              Text(
-                user,
-                style: TextStyle(
-                  color: Colors.lightBlue,
-                  fontSize: 14,
                 ),
-              ),
-              SizedBox(height: 10),
-              Text(
-                body,
-                style: TextStyle(
-                  color: Colors.black54,
-                  fontSize: 14,
+                SizedBox(height: 5),
+                Text(
+                  user,
+                  style: TextStyle(
+                    color: Colors.lightBlue,
+                    fontSize: 14,
+                  ),
                 ),
-              ),
-            ],
+                SizedBox(height: 10),
+                Text(
+                  body,
+                  style: TextStyle(
+                    color: Colors.black54,
+                    fontSize: 14,
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),
