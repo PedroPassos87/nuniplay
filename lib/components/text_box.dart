@@ -18,8 +18,8 @@ class MyTextBox extends StatelessWidget {
         color: Colors.grey[200],
         borderRadius: BorderRadius.circular(8),
       ),
-      padding: EdgeInsets.only(left: 15.0, bottom: 15.0),
-      margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
+      padding: const EdgeInsets.only(left: 15.0, bottom: 15.0),
+      margin: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -33,7 +33,7 @@ class MyTextBox extends StatelessWidget {
               // edit button
               IconButton(
                 onPressed: onPressed,
-                icon: Icon(Icons.settings),
+                icon: const Icon(Icons.settings),
                 color: Colors.grey[400],
               ),
             ],

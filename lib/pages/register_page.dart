@@ -1,18 +1,11 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_build_context_synchronously, avoid_single_cascade_in_expression_statements
-import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:uniplay/components/image_picker.dart';
 import 'package:uniplay/components/my_buttonP.dart';
 import 'package:uniplay/components/my_textfield.dart';
-import 'package:uniplay/components/square_tile.dart';
-import 'package:uniplay/services/auth_service.dart';
 import 'package:uuid/uuid.dart';
-
-import '../resources/add_data.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key, required this.onTap}) : super(key: key);
@@ -60,7 +53,7 @@ class _RegisterPageState extends State<RegisterPage>
   //sign user up method
   Future signUserUp() async {
     //show loading circle ---> in the future change for an animation
-    /*
+
     showDialog(
       context: context,
       builder: (context) {
@@ -90,7 +83,7 @@ class _RegisterPageState extends State<RegisterPage>
       Navigator.pop(context);
       showErrorMessage(e.code);
     }
-    */
+
     //authenticate user
     if (passwordConfirmed()) {
       try {
@@ -109,7 +102,7 @@ class _RegisterPageState extends State<RegisterPage>
         );
       } catch (e) {
         //pop the loading circle
-        showErrorMessage("Algo deu errado, verifique seus dados");
+        showErrorMessage(e.toString());
       }
     }
   }

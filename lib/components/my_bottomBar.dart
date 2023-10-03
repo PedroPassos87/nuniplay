@@ -4,6 +4,8 @@ import '../pages/home_page.dart';
 import '../pages/profile_page.dart';
 
 class MyNavigationBar extends StatelessWidget {
+  const MyNavigationBar({super.key});
+
   @override
   Widget build(BuildContext context) {
     void goToHomePage() {
@@ -27,7 +29,7 @@ class MyNavigationBar extends StatelessWidget {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => ProfilePage(),
+          builder: (context) => const ProfilePage(),
         ),
       );
     }
@@ -40,32 +42,32 @@ class MyNavigationBar extends StatelessWidget {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => EditProfile(),
+          builder: (context) => const EditProfile(),
         ),
       );
     }
 
     return BottomAppBar(
-      color: Color.fromARGB(255, 255, 255, 255),
+      color: const Color.fromARGB(255, 255, 255, 255),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           IconButton(
-            icon: Icon(Icons.person),
+            icon: const Icon(Icons.person),
             onPressed: goToProfilePage,
           ),
-          SizedBox(width: 20),
+          const SizedBox(width: 20),
           IconButton(
-            icon: Icon(Icons.home),
+            icon: const Icon(Icons.home),
             onPressed: goToHomePage,
           ),
-          SizedBox(width: 20),
+          const SizedBox(width: 20),
           IconButton(
-            icon: Icon(Icons.settings),
+            icon: const Icon(Icons.settings),
             onPressed: goToEditPage,
           ),
-          SizedBox(width: 20),
+          const SizedBox(width: 20),
         ],
       ),
     );

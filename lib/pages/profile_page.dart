@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-import 'dart:ffi';
 import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -9,14 +8,13 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uniplay/components/image_picker.dart';
 import 'package:uniplay/components/my_bottomBar.dart';
-import 'package:uniplay/resources/add_data.dart';
 
 import '../database/get_user_nick.dart';
 import 'home_page.dart';
 import 'edit_page.dart';
 
 class ProfilePage extends StatefulWidget {
-  ProfilePage({super.key});
+  const ProfilePage({super.key});
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -35,10 +33,10 @@ class _ProfilePageState extends State<ProfilePage> {
         .get()
         .then(
       (snapshot) {
-        snapshot.docs.forEach((document) {
+        for (var document in snapshot.docs) {
           print(document.reference);
           docIDs.add(document.reference.id);
-        });
+        }
       },
     );
   }

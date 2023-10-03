@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class GetUserNick extends StatelessWidget {
   final String documentId;
 
-  GetUserNick({required this.documentId});
+  const GetUserNick({super.key, required this.documentId});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class GetUserNick extends StatelessWidget {
             ),
           );
         }
-        return Text('Loading......');
+        return const Text('Loading......');
       },
     );
   }
