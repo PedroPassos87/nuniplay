@@ -1,0 +1,10 @@
+{
+  "projects": {
+    "default": "uniplay-556bb"
+  },
+  "dataconnectEmulatorConfig": {
+    "postgres": {
+      "localConnectionString": "postgresql://localhost:5432?sslmode=disable"
+    }
+  }
+}

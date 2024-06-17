@@ -1,8 +1,6 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_build_context_synchronously, unused_catch_clause
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:uniplay/components/my_textfield.dart';
 import 'package:uniplay/components/square_tile.dart';
 import 'package:uniplay/services/auth_service.dart';
@@ -133,6 +131,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
 
                         //email textfield
                         MyTextField(
+                          key: Key('email_key'),
                           controller: emailController,
                           hintText: 'E-mail',
                           obscureText: false,
@@ -143,6 +142,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
 
                         //password textfield
                         MyTextField(
+                          key: Key('senha_key'),
                           controller: passwordController,
                           hintText: 'Password',
                           obscureText: true,
@@ -187,6 +187,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
 
                         //sign in
                         MyButtonP(
+                          key: Key('sign_in_button'), // Adiciona a key ao botão
                           onTap: signUserIn,
                           text: 'Sign in',
                         ),
